@@ -1,0 +1,55 @@
+\documentclass[11pt]{article}
+
+\usepackage{microtype}
+\usepackage{lipsum}
+
+% to compile a camera-ready version, add the [final] option:
+%
+% \usepackage[final]{automl}
+\usepackage{automl}
+
+\title{Test Submission for AutoML 2022}
+
+% The syntax for adding an author is
+%
+% \author[i]{\nameemail{author name}{author email}}
+%
+% where i is an affiliation counter. Authors may have
+% multiple affiliations; e.g.:
+%
+% \author[1,2]{\nameemail{Anonymous}{anonymous@example.com}}
+
+\author[1]{\nameemail{Author 1}{email1@example.com}}
+\author[2,3]{\nameemail{Author 2}{email2@example.com}}
+\author[3]{\nameemail{Author 3}{email3@example.com}}
+\author[4]{\nameemail{Author 4}{email4@example.com}}
+
+
+% if you need to force a linebreak in the author list, prepend an \author entry
+% with \\:
+\author[3]{\\\nameemail{Author 5}{email5@example.com}}
+
+% Specify corresponding affiliations after authors, referring to counter used in
+% \author
+
+\affil[1]{Institution 1}
+\affil[2]{Institution 2}
+\affil[3]{Institution 3}
+\affil[4]{Institution 4}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  \lipsum[1]
+\end{abstract}
+
+\lipsum
+
+% acknowledgements will be commented out automatically at submission time
+\begin{acknowledgements}
+  \lipsum[9]
+\end{acknowledgements}
+
+\end{document}
