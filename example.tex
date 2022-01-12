@@ -1,14 +1,69 @@
 \documentclass[11pt]{article}
 
-\usepackage{microtype}
-\usepackage{lipsum}
+\usepackage{microtype} % microtypography
+\usepackage{booktabs}  % tables
 
-% to compile a camera-ready version, add the [final] option:
+% algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% AMS math
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+% With no package options, the submission will be anonymized, the supplemental
+% material will be suppressed, and line numbers will be added to the manuscript.
+%
+% To hide the supplementary material (e.g., for the first submission deadline),
+% use the [hidesupplement] option:
+%
+% \usepackage[hidesupplement]{automl}
+%
+% To compile a non-anonymized camera-ready version, add the [final] option:
 %
 % \usepackage[final]{automl}
-\usepackage{automl}
+%
+% or
+%
+% \usepackage[final, hidesupplement]{automl}
 
-\title{Test Submission for AutoML 2022}
+\usepackage[hidesupplement]{automl}
+
+% You may use any reference style as long as you are consistent throughout the
+% document. As a default we suggest author--year citations; for bibtex and
+% natbib you may use:
+
+\usepackage{natbib}
+\bibliographystyle{apalike}
+
+% and for biber and biblatex you may use:
+
+% \usepackage[%
+%   backend=biber,
+%   style=authoryear-comp,
+%   sortcites=true,
+%   natbib=true,
+%   giveninits=true,
+%   maxcitenames=2,
+%   doi=false,
+%   url=true,
+%   isbn=false,
+%   dashed=false
+% ]{biblatex}
+% \addbibresource{example.bib}
+
+% example bibliography file
+\usepackage{filecontents}
+\begin{filecontents}{example.bib}
+@book{example_book,
+  author    = {Author, Anonymous},
+  year      = {2000},
+  title     = {The Definititve Resource},
+  publisher = {Universal Press}
+}
+\end{filecontents}
+
+\title{Example Submission for AutoML 2022}
 
 % The syntax for adding an author is
 %
@@ -24,13 +79,13 @@
 \author[3]{\nameemail{Author 3}{email3@example.com}}
 \author[4]{\nameemail{Author 4}{email4@example.com}}
 
-
 % if you need to force a linebreak in the author list, prepend an \author entry
 % with \\:
+
 \author[3]{\\\nameemail{Author 5}{email5@example.com}}
 
 % Specify corresponding affiliations after authors, referring to counter used in
-% \author
+% \author:
 
 \affil[1]{Institution 1}
 \affil[2]{Institution 2}
@@ -42,14 +97,373 @@
 \maketitle
 
 \begin{abstract}
-  \lipsum[1]
+  Create with \verb|\begin{abstract} ... \end{abstract}|.
 \end{abstract}
 
-\lipsum
+\section{Package options}
 
-% acknowledgements will be commented out automatically at submission time
+With no options, the \texttt{automl} package prepares an anonymized manuscript
+with hidden supplemental material. Two options are supported changing this
+behavior:
+\begin{itemize}
+\item \texttt{final} -- produces non-anonymized camera-ready version for
+  distribution and/or publication
+\item \texttt{hidesupplement} -- hides supplementary material (following
+  \verb|\appendix|); for example, for submitting or distributing the main paper
+  without supplement
+\end{itemize}
+Note that \texttt{final} may be used in combination with  \texttt{hidesupplement}
+to prepare a non-anonymized version of the main paper with hidden supplement.
+
+\section{Supplemental material}
+
+Please provide supplemental material in the main document. You may begin the
+supplemental material using \verb|\appendix|. Any content following this command
+will be suppressed in the final output if the \texttt{hidesupplement} option is
+given.
+
+\section{Note regarding line numbering at submission time}
+
+To ensure that line numbering works correctly with display math mode, please do
+\emph{not} use \TeX{} primitives such as \verb|$$| and \texttt{eqnarray}.  (You
+shouldn't be using these anyway!)%
+%
+\footnote{\url{https://tex.stackexchange.com/questions/196/eqnarray-vs-align}}%
+\footnote{\url{https://tex.stackexchange.com/questions/503/why-is-preferable-to}}
+%
+Please use \LaTeX{} equivalents such as \verb|\[ ... \]| (or
+\verb|\begin{equation} ... \end{equation}|) and the \texttt{align} environment
+from the \texttt{amsmath} package.%
+%
+\footnote{\url{http://tug.ctan.org/info/short-math-guide/short-math-guide.pdf}}
+
+\section{References}
+
+Authors may use any citation style as long as it is consistent throughout the
+document. By default we propose author--year citations. Code is provided in the
+preamble to achieve such citations using either \texttt{natbib/bibtex} or the
+more modern \texttt{biblatex/biber}.
+
+You may create a parenthetical reference with \verb|\citep|, such as appears at
+the end of this sentence \citep{example_book}.  You may create a textual
+reference using \verb|\citet|, as \citet{example_book} also demonstrated.
+
+\section{Tables}
+
+We recommend the \texttt{booktabs} package for creating tables, as demonstrated
+below and in Table \ref{example_table}. Note that table captions appear
+\emph{above} tables.
+
+\begin{table}
+  \caption{An example table using the \texttt{booktabs} package.}
+  \label{example_table}
+  \centering
+  \begin{tabular}{lrr}
+    \toprule
+    & \multicolumn{2}{c}{metric} \\
+    \cmidrule{2-3}
+    method & accuracy & time \\
+    \midrule
+    baseline & 10 & 100 \\
+    our method & \textbf{100} & \textbf{10} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Figures and subfigures}
+
+The \texttt{automl} style loads the \texttt{subcaption} package, which may be
+used to create and caption subfigures. Please note that this is
+\emph{incompatible} with the (obsolete and deprecated) \texttt{subfigure}
+package. A figure with subfigures is demonstrated below and in Figure
+\ref{example_figure}. Note that figure captions appear \emph{below} figures.
+
+\begin{figure}
+  \begin{subfigure}[t]{0.5\linewidth}
+    \centering
+    \framebox{Amazing figure!}
+    \caption{Subfigure caption.}
+    \label{example_figure_left}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.5\linewidth}
+    \centering
+    \framebox{Another amazing figure!}
+    \caption{Another subfigure caption.}
+    \label{example_figure_right}
+  \end{subfigure}
+  \caption{An example figure with subfigures. \subref{example_figure_left}: an
+    amazing figure. \subref{example_figure_right}: another amazing figure.}
+  \label{example_figure}
+\end{figure}
+
+\section{Pseudocode}
+\label{sec:code}
+
+To add pseudocode, we suggest the use of the \texttt{algorithm} and
+\texttt{algpseudocode} packages, included here. An example algorithm listing (in
+a floating \texttt{algorithm} environment) is provided below and in Algorithm
+\ref{euclid}.
+
+% from the algorithmicx package documentation by Szász János
+\begin{algorithm}
+  \caption{Euclid’s algorithm}
+  \label{euclid}
+  % optional argument controls line numbering; remove to suppress
+  \begin{algorithmic}[1]
+    \Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
+      \State $r\gets a\bmod b$
+      \While{$r\not=0$}\Comment{We have the answer if r is 0}
+        \State $a\gets b$
+        \State $b\gets r$
+        \State $r\gets a\bmod b$
+      \EndWhile\label{euclidendwhile}
+      \State \textbf{return} $b$\Comment{The gcd is b}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\section{Adding acknowledgments}
+
+You may add acknowledgments of funding, etc.\ using the \texttt{acknowledgments}
+environment. Acknowledgments will be automatically commented out at submission
+time. An example is given below in the source code for this document; it will be
+hidden in the \textsc{pdf} unless the \texttt{final} option is given.
+
+\newpage
+
+The following sections must be completed by \emph{all authors.}
+
+\section{Broader Impact Statement}
+
+\answerTODO{} Please include a broader impact statement regarding the approach,
+datasets and applications proposed/used in your paper. It should reflect on the
+environmental, ethical and societal implications of your work. The statement
+should require at most one page.
+
+\section{Reproducibility Checklist}
+
+The reproducibility checklist is a combination of the
+%
+\href{https://neurips.cc/Conferences/2021/PaperInformation/PaperChecklist}
+     {NeurIPS '21 checklist}
+%
+and the
+\href{https://www.automl.org/wp-content/uploads/NAS/NAS_checklist.pdf}
+     {\textsc{nas} checklist}.
+%
+For each question, change the default \verb|\answerTODO{}| (typeset \answerTODO)
+to
+\verb|\answerYes{[justification]}| (typeset \answerYes),
+\verb|\answerNo{[justification]}| (typeset \answerNo), or
+\verb|\answerNA{[justification]}| (typeset \answerNA).
+\textbf{You must include a brief justification to your answer,} either by
+referencing the appropriate section of your paper or providing a brief inline
+description.  For example:
+\begin{itemize}
+\item Did you include the license of the code and datasets? \answerYes{See
+  Section~\ref{sec:code}.}
+\item Did you include all the code for running experiments? \answerNo{We include
+  the code we wrote, but it depends on proprietary libraries for executing on a
+  compute cluster and as such will not be runnable without modifications. We
+  also include a runnable sequential version of the code that we also report
+  experiments in the paper with.}
+\item Did you include the license of the datasets? \answerNA{Our experiments
+  were conducted on publicly available datasets and we have not introduced new
+  datasets.}
+\end{itemize}
+Please note that if you answer a question with \verb|\answerNo{}|, we expect
+that you compensate for it (e.g., if you cannot provide the full evaluation
+code, you should at least provide code for a minimal reproducibility of the main
+insights of your paper).
+
+Please do not modify the questions and only use the provided macros for your
+answers. Note that this section does not count towards the page limit. In your
+paper, please delete this instructions block and only keep the Checklist section
+heading above along with the questions/answers below.
+\begin{enumerate}
+\item For all authors\dots
+  %
+  \begin{enumerate}
+  \item Do the main claims made in the abstract and introduction accurately
+    reflect the paper's contributions and scope?
+    %
+    \answerTODO{}
+    %
+  \item Did you describe the limitations of your work?
+    %
+    \answerTODO{}
+    %
+  \item Did you discuss any potential negative societal impacts of your work?
+    %
+    \answerTODO{}
+    %
+  \item Have you read the ethics review guidelines and ensured that your paper
+    conforms to them?
+    %
+    \answerTODO{}
+    %
+  \end{enumerate}
+  %
+\item If you are including theoretical results\dots
+  %
+  \begin{enumerate}
+  \item Did you state the full set of assumptions of all theoretical results?
+    %
+    \answerTODO{}
+    %
+  \item Did you include complete proofs of all theoretical results?
+    %
+    \answerTODO{}
+    %
+  \end{enumerate}
+  %
+\item If you ran experiments\dots
+  %
+  \begin{enumerate}
+  \item Did you include the code, data, and instructions needed to reproduce the
+    main experimental results, including all requirements (e.g.,
+    \texttt{requirements.txt} with explicit version), an instructive
+    \texttt{README} with installation, and execution commands (either in the
+    supplemental material or as a \textsc{url})?
+    %
+    \answerTODO{}
+    %
+  \item Did you include the raw results of running the given instructions on the
+    given code and data?
+    %
+    \answerTODO{}
+    %
+  \item Did you include scripts and commands that can be used to generate the
+    figures and tables in your paper based on the raw results of the code, data,
+    and instructions given?
+    %
+    \answerTODO{}
+    %
+  \item Did you ensure sufficient code quality such that your code can be safely
+    executed and the code is properly documented?
+    %
+    \answerTODO{}
+    %
+  \item Did you specify all the training details (e.g., data splits,
+    pre-processing, search spaces, fixed hyperparameter settings, and how they
+    were chosen)?
+    %
+    \answerTODO{}
+    %
+  \item Did you ensure that you compared different methods (including your own)
+    exactly on the same benchmarks, including the same datasets, search space,
+    code for training and hyperparameters for that code?
+    %
+    \answerTODO{}
+    %
+  \item Did you run ablation studies to assess the impact of different
+    components of your approach?
+    %
+    \answerTODO{}
+    %
+  \item Did you use the same evaluation protocol for the methods being compared?
+    %
+    \answerTODO{}
+    %
+  \item Did you compare performance over time?
+    %
+    \answerTODO{}
+    %
+  \item Did you perform multiple runs of your experiments and report random seeds?
+    %
+    \answerTODO{}
+    %
+  \item Did you report error bars (e.g., with respect to the random seed after
+    running experiments multiple times)?
+    %
+    \answerTODO{}
+    %
+  \item Did you use tabular or surrogate benchmarks for in-depth evaluations?
+    %
+    \answerTODO{}
+    %
+  \item Did you include the total amount of compute and the type of resources
+    used (e.g., type of \textsc{gpu}s, internal cluster, or cloud provider)?
+    %
+    \answerTODO{}
+    %
+  \item Did you report how you tuned hyperparameters, and what time and
+    resources this required (if they were not automatically tuned by your AutoML
+    method, e.g. in a \textsc{nas} approach; and also hyperparameters of your
+    own method)?
+    %
+    \answerTODO{}
+    %
+  \end{enumerate}
+  %
+\item If you are using existing assets (e.g., code, data, models) or
+  curating/releasing new assets\dots
+  %
+  \begin{enumerate}
+  \item If your work uses existing assets, did you cite the creators?
+    %
+    \answerTODO{}
+    %
+  \item Did you mention the license of the assets?
+    %
+    \answerTODO{}
+    %
+  \item Did you include any new assets either in the supplemental material or as
+    a \textsc{url}?
+    %
+    \answerTODO{}
+    %
+  \item Did you discuss whether and how consent was obtained from people whose
+    data you're using/curating?
+    %
+    \answerTODO{}
+    %
+  \item Did you discuss whether the data you are using/curating contains
+    personally identifiable information or offensive content?
+    %
+    \answerTODO{}
+    %
+  \end{enumerate}
+  %
+\item If you used crowdsourcing or conducted research with human subjects\dots
+  %
+  \begin{enumerate}
+  \item Did you include the full text of instructions given to participants and
+    screenshots, if applicable?
+    %
+    \answerTODO{}
+    %
+  \item Did you describe any potential participant risks, with links to
+    Institutional Review Board (\textsc{irb}) approvals, if applicable?
+    %
+    \answerTODO{}
+    %
+  \item Did you include the estimated hourly wage paid to participants and the
+    total amount spent on participant compensation?
+    %
+    \answerTODO{}
+    %
+  \end{enumerate}
+\end{enumerate}
+
 \begin{acknowledgements}
-  \lipsum[9]
+  The authors have many people to thank!
 \end{acknowledgements}
+
+% print bibliography -- for bibtex / natbib, use:
+
+\bibliography{example}
+
+% and for biber / biblatex, use:
+
+% \printbibliography
+
+% supplemental material -- everything hereafter will be suppressed during
+% submission time if the hidesupplement option is provided!
+\appendix
+
+\section{Proof of theorem 1}
+
+This material will be hidden if \texttt{hidesupplement} is provided.
 
 \end{document}

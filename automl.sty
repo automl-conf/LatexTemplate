@@ -1,5 +1,7 @@
+% Author: Roman Garnett, romangarnett@gmail.com
+
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{automl}[2021/12/15 AutoML submission/camera-ready style file]
+\ProvidesPackage{automl}[2022/01/10 AutoML submission/camera-ready style file]
 
 % change this every year for notice string
 \newcommand{\@utomlyear}{2022}
@@ -8,6 +10,11 @@
 \newif\if@submission\@submissiontrue
 \DeclareOption{final}{%
   \@submissionfalse
+}
+% declare hidesupplement option, which hides supplemental material
+\newif\if@hidesupplement\@hidesupplementfalse
+\DeclareOption{hidesupplement}{%
+  \@hidesupplementtrue
 }
 \ProcessOptions\relax
 
@@ -45,6 +52,11 @@
   }
 \else
   \newcommand{\c@nferencestring}{AutoML Conference \@utomlyear}
+\fi
+
+% hide the supplement by redefining \appendix
+\if@hidesupplement
+  \let\appendix\enddocument
 \fi
 
 % set page geometry
@@ -209,6 +221,11 @@
   \nonfrenchspacing%
 }
 
+% ensure no floats on first page
+\AtBeginDocument{
+  \suppressfloats%
+}
+
 % abstract
 \renewenvironment{abstract}{%
   \middletitleb@r
@@ -302,5 +319,14 @@
   leftmargin=*,%
   topsep=0.5\baselineskip,%
   itemsep=0.25\baselineskip}
+
+% reproducibility checklist
+\usepackage{xcolor}
+\usepackage{xspace}
+
+\newcommand{\answerYes}[1]{{\textcolor{blue}{[Yes]}\xspace#1}}
+\newcommand{\answerNo}[1]{{\textcolor{orange}{[No]}\xspace#1}}
+\newcommand{\answerNA}[1]{{\textcolor{gray}{[N/A]}\xspace#1}}
+\newcommand{\answerTODO}{\textcolor{red}{\textbf{[TODO]}}}
 
 \endinput
