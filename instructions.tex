@@ -11,10 +11,6 @@
 \usepackage{microtype} % microtypography
 \usepackage{booktabs}  % tables
 
-% algorithms
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-
 % AMS math
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -221,28 +217,24 @@ package. A figure with subfigures is demonstrated below and in Figure
 \section{Pseudocode}
 \label{sec:code}
 
-To add pseudocode, we suggest the use of the \texttt{algorithm} and
-\texttt{algpseudocode} packages, included here. An example algorithm listing (in
-a floating \texttt{algorithm} environment) is provided below and in Algorithm
-\ref{euclid}.
-
-% from the algorithmicx package documentation by Szász János
-\begin{algorithm}
-  \caption{Euclid’s algorithm}
-  \label{euclid}
-  % optional argument controls line numbering; remove to suppress
-  \begin{algorithmic}[1]
-    \Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
-      \State $r\gets a\bmod b$
-      \While{$r\not=0$}\Comment{We have the answer if r is 0}
-        \State $a\gets b$
-        \State $b\gets r$
-        \State $r\gets a\bmod b$
-      \EndWhile\label{euclidendwhile}
-      \State \textbf{return} $b$\Comment{The gcd is b}
-    \EndProcedure
-  \end{algorithmic}
-\end{algorithm}
+To add pseudocode, you may make use of any package you see fit -- the
+\texttt{automl} package should be compatible with any of them. In particular,
+you may want to check out the \texttt{algorithm2e}%
+%
+\footnote{\url{https://ctan.org/pkg/algorithm2e}}
+%
+and/or the \texttt{algorithmicx}%
+%
+\footnote{\url{https://ctan.org/pkg/algorithmicx}}
+%
+packages, both of which can produce nicely typeset pseudocode. You may also wish
+to load the \texttt{algorithm}%
+%
+\footnote{\url{https://ctan.org/pkg/algorithms}}
+%
+package, which creates an \texttt{algorithm} floating environment you can access
+with \verb|\begin{algorithm} ... \end{algorithm}|. This environment supports
+\verb|\caption{}|, \verb|\label{}| and \verb|\ref{}|, etc.
 
 \section{Adding acknowledgments}
 
