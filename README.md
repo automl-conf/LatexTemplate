@@ -6,7 +6,7 @@ Latex Template for [AutoML-Conf](https://www.automl.cc)
 
 * `instructions.tex` and `instructions.pdf` -- documentation for the `automl`
   LaTeX package and tips for authors
-* `barebones.tex` -- a barebones submission template
+* `barebones_submission_template.tex` -- a barebones submission template
 
 ## Questions
 
