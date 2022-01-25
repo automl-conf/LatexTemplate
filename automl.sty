@@ -210,6 +210,9 @@
   hyperfootnotes=false]{hyperref} % hyperlinks
 \hypersetup{pdflang=en}
 \newcommand{\nameemail}[2]{\mbox{\href{mailto:#2}{#1}}}
+\if@submission
+  \AtBeginDocument{\hypersetup{pdfauthor={Anonymous}}}
+\fi
 
 \providecommand{\@maketitle}{}
 \renewcommand{\@maketitle}{%

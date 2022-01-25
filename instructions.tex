@@ -98,7 +98,7 @@
 
 % define PDF metadata, aids in accessibility of the resulting PDF
 \hypersetup{%
-  pdfauthor={AutoML-Conf},
+  pdfauthor={AutoML-Conf}, % will be reset to "Anonymous" unless the "final" package option is given
   pdftitle={Documentation for automl Package},
   pdfsubject={Documentation for automl Package},
   pdfkeywords={AutoML-Conf, LaTeX, style}
@@ -203,6 +203,9 @@ used to create and caption subfigures. Please note that this is
 \emph{incompatible} with the (obsolete and deprecated) \texttt{subfigure}
 package. A figure with subfigures is demonstrated below and in Figure
 \ref{example_figure}. Note that figure captions appear \emph{below} figures.
+
+Please ensure that all text appearing in figures (axis labels, legends, etc.)
+is legible.
 
 \begin{figure}
   \begin{subfigure}[t]{0.5\linewidth}
