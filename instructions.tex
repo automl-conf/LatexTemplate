@@ -62,12 +62,12 @@
 @book{example_book,
   author    = {Author, Anonymous},
   year      = {2000},
-  title     = {The Definititve Resource},
+  title     = {The Definitive Resource},
   publisher = {Universal Press}
 }
 \end{filecontents}
 
-\title{Documentation for \texttt{automl} Package}
+\title{Documentation for the \texttt{automl} Package}
 
 % The syntax for adding an author is
 %
@@ -99,7 +99,7 @@
 % define PDF metadata, aids in accessibility of the resulting PDF
 \hypersetup{%
   pdfauthor={AutoML-Conf}, % will be reset to "Anonymous" unless the "final" package option is given
-  pdftitle={Documentation for automl Package},
+  pdftitle={Documentation for the automl Package},
   pdfsubject={Documentation for automl Package},
   pdfkeywords={AutoML-Conf, LaTeX, style}
 }
@@ -123,7 +123,7 @@ Users are encouraged to submit issues, bug reports, etc.\ to:
 \begin{center}
   \url{https://github.com/automl-conf/LatexTemplate/issues}
 \end{center}
-A barebones submission is also available as \texttt{barebones.tex} in the same
+A barebones submission is also available as \texttt{barebones\_submission\_template.tex} in the same
 repository.
 
 \section{Package options}
@@ -177,8 +177,7 @@ reference using \verb|\citet|, as \citet{example_book} also demonstrated.
 \section{Tables}
 
 We recommend the \texttt{booktabs} package for creating tables, as demonstrated
-below and in Table \ref{example_table}. Note that table captions appear
-\emph{above} tables.
+in Table \ref{example_table}. Note that table captions appear \emph{above} tables.
 
 \begin{table}
   \caption{An example table using the \texttt{booktabs} package.}
@@ -201,7 +200,7 @@ below and in Table \ref{example_table}. Note that table captions appear
 The \texttt{automl} style loads the \texttt{subcaption} package, which may be
 used to create and caption subfigures. Please note that this is
 \emph{incompatible} with the (obsolete and deprecated) \texttt{subfigure}
-package. A figure with subfigures is demonstrated below and in Figure
+package. A figure with subfigures is demonstrated in Figure
 \ref{example_figure}. Note that figure captions appear \emph{below} figures.
 
 Please ensure that all text appearing in figures (axis labels, legends, etc.)
@@ -256,16 +255,23 @@ hidden in the \textsc{pdf} unless the \texttt{final} option is given.
 
 \section{Required Material}
 
-All authors must include the following two sections (\textbf{Broader Impact
-  Statement} and \textbf{Reproducibility Checklist}) in their manuscripts, both
+All submissions must include a discussion on limitations and a broader impact 
+statement; and a \textbf{Reproducibility Checklist} in their manuscripts, both
 at submission and camera-ready time.
+The discussion of limitations and broader impact is part of the 9 pages allocated 
+to the main paper (there is no page limitation for references and appendices), while
+the reproducibility checklist is not.
 
-\section{Broader Impact Statement}
+\section{Limitations and Broader Impact Statement}
 
-All authors must include a broader impact statement regarding the approach,
-datasets and applications proposed/used in your paper. It should reflect on the
-environmental, ethical and societal implications of your work. The statement
-should require at most one page.
+The 9 pages allocated for the main paper must include a discussion of limitations 
+and a broader impact statement regarding the approach, datasets and applications 
+proposed/used in your paper. It should reflect on the environmental, ethical and 
+societal implications of your work. The statement should require at most one page
+and must be included both at submission and camera-ready time.
+
+This section is included in the template as a default, but you can also place these
+discussions anywhere else in the main paper, e.g., in the introduction/future work.
 
 The Centre for the Governance of AI has written an excellent guide for writing
 good broader impact statements (for the NeurIPS conference) that may be a useful
@@ -275,6 +281,8 @@ resource for AutoML-Conf authors.%
 
 \section{Reproducibility Checklist}
 
+All authors must include a section with the AutoML-Conf \textbf{Reproducibility 
+Checklist} in their manuscripts, both at submission and camera-ready time.
 The reproducibility checklist is a combination of the
 %
 \href{https://neurips.cc/Conferences/2021/PaperInformation/PaperChecklist}
@@ -306,7 +314,7 @@ description.  For example:
 \end{itemize}
 Please note that if you answer a question with \verb|\answerNo{}|, we expect
 that you compensate for it (e.g., if you cannot provide the full evaluation
-code, you should at least provide code for a minimal reproducibility of the main
+code, you should at least provide code for a minimal reproduction of the main
 insights of your paper).
 
 Please do not modify the questions and only use the provided macros for your
