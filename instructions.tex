@@ -12,7 +12,6 @@
 \usepackage{booktabs}  % tables
 \usepackage{url}  % urls
 
-
 % AMS math
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -25,15 +24,18 @@
 %
 % \usepackage[hidesupplement]{automl}
 %
-% To compile a non-anonymized camera-ready version, add the [final] option:
+% To compile a non-anonymized camera-ready version, add the [final] option (for
+% the main track), or the [finalworkshop] option (for the workshop track), e.g.,
 %
 % \usepackage[final]{automl}
+% \usepackage[finalworkshop]{automl}
 %
 % or
 %
 % \usepackage[final, hidesupplement]{automl}
+% \usepackage[finalworkshop, hidesupplement]{automl}
 
-\usepackage[hidesupplement]{automl}
+\usepackage[finalworkshop]{automl}
 
 % You may use any reference style as long as you are consistent throughout the
 % document. As a default we suggest author--year citations; for bibtex and
@@ -135,13 +137,16 @@ with hidden supplemental material. Two options are supported changing this
 behavior:
 \begin{itemize}
 \item \texttt{final} -- produces non-anonymized camera-ready version for
-  distribution and/or publication
+  distribution and/or publication in the main conference track
+\item \texttt{finalworkshop} -- produces non-anonymized camera-ready version for
+  distribution and/or publication in the workshop track
 \item \texttt{hidesupplement} -- hides supplementary material (following
   \verb|\appendix|); for example, for submitting or distributing the main paper
   without supplement
 \end{itemize}
-Note that \texttt{final} may be used in combination with  \texttt{hidesupplement}
-to prepare a non-anonymized version of the main paper with hidden supplement.
+Note that \texttt{final} or \texttt{finalworkshop} may be used in combination
+with \texttt{hidesupplement} to prepare a non-anonymized version of the main
+paper with hidden supplement.
 
 \section{Supplemental material}
 
@@ -253,22 +258,23 @@ with \verb|\begin{algorithm} ... \end{algorithm}|. This environment supports
 You may add acknowledgments of funding, etc.\ using the \texttt{acknowledgments}
 environment. Acknowledgments will be automatically commented out at submission
 time. An example is given below in the source code for this document; it will be
-hidden in the \textsc{pdf} unless the \texttt{final} option is given.
+hidden in the \textsc{pdf} unless the \texttt{final} or \texttt{finalworkshop}
+option is given.
 
 \section{Required Material}
 
-All submissions must include a discussion on limitations and a broader impact 
+All submissions must include a discussion on limitations and a broader impact
 statement; and a \textbf{Reproducibility Checklist} in their manuscripts, both
 at submission and camera-ready time.
-The discussion of limitations and broader impact is part of the 9 pages allocated 
+The discussion of limitations and broader impact is part of the 9 pages allocated
 to the main paper (there is no page limitation for references and appendices), while
 the reproducibility checklist is not.
 
 \section{Limitations and Broader Impact Statement}
 
-The 9 pages allocated for the main paper must include a discussion of limitations 
-and a broader impact statement regarding the approach, datasets and applications 
-proposed/used in your paper. It should reflect on the environmental, ethical and 
+The 9 pages allocated for the main paper must include a discussion of limitations
+and a broader impact statement regarding the approach, datasets and applications
+proposed/used in your paper. It should reflect on the environmental, ethical and
 societal implications of your work. The statement should require at most one page
 and must be included both at submission and camera-ready time.
 
@@ -283,7 +289,7 @@ resource for AutoML-Conf authors.%
 
 \section{Reproducibility Checklist}
 
-All authors must include a section with the AutoML-Conf \textbf{Reproducibility 
+All authors must include a section with the AutoML-Conf \textbf{Reproducibility
 Checklist} in their manuscripts, both at submission and camera-ready time.
 The reproducibility checklist is a combination of the
 %

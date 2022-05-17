@@ -7,14 +7,20 @@
 % Please file any issues you may have there.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{automl}[2022/01/12 AutoML submission/camera-ready style file]
+\ProvidesPackage{automl}[2022/05/16 AutoML submission/camera-ready style file]
 
 % change this every year for notice string
 \newcommand{\@utomlyear}{2022}
 
-% declare final option, which creates camera-ready copy
+% declare final option, which creates camera-ready copy for the main track
 \newif\if@submission\@submissiontrue
 \DeclareOption{final}{%
+  \@submissionfalse
+}
+% declare finalworkshop option, which creates camera-ready copy for the workshop track
+\newif\if@workshop\@workshopfalse
+\DeclareOption{finalworkshop}{%
+  \@workshoptrue
   \@submissionfalse
 }
 % declare hidesupplement option, which hides supplemental material
@@ -57,7 +63,11 @@
       }{}
   }
 \else
-  \newcommand{\c@nferencestring}{AutoML Conference \@utomlyear}
+  \if@workshop
+    \newcommand{\c@nferencestring}{AutoML Conference \@utomlyear{} Workshop Track}
+  \else
+    \newcommand{\c@nferencestring}{AutoML Conference \@utomlyear}
+  \fi
 \fi
 
 % hide the supplement by redefining \appendix
