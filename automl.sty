@@ -32,7 +32,7 @@
 
 % handle tweaks for camera-ready copy vs. submission copy
 \if@submission
-  \newcommand{\c@nferencestring}{Submitted to AutoML Conference \@utomlyear}
+  \newcommand{\c@nferencestring}{Submitted to AutoML \@utomlyear}
 
   % line numbers for submission
   \usepackage[right]{lineno}
@@ -64,9 +64,9 @@
   }
 \else
   \if@workshop
-    \newcommand{\c@nferencestring}{AutoML Conference \@utomlyear{} Workshop Track}
+    \newcommand{\c@nferencestring}{AutoML \@utomlyear{} Workshop Track}
   \else
-    \newcommand{\c@nferencestring}{AutoML Conference \@utomlyear}
+    \newcommand{\c@nferencestring}{AutoML \@utomlyear}
   \fi
 \fi
 
