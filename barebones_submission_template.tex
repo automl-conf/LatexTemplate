@@ -19,21 +19,30 @@
 % With no package options, the submission will be anonymized, the supplemental
 % material will be suppressed, and line numbers will be added to the manuscript.
 %
-% To hide the supplementary material (e.g., for the first submission deadline),
-% use the [hidesupplement] option:
-%
-% \usepackage[hidesupplement]{automl}
-%
-% To compile a non-anonymized camera-ready version, add the [final] option (for
-% the main track), or the [finalworkshop] option (for the workshop track), e.g.,
+% To compile a non-anonymized camera-ready version, add the [final] option:
 %
 % \usepackage[final]{automl}
-% \usepackage[finalworkshop]{automl}
 %
-% or
+% To compile for the workshop track, add the [workshop] option:
 %
-% \usepackage[final, hidesupplement]{automl}
-% \usepackage[finalworkshop, hidesupplement]{automl}
+% \usepackage[workshop]{automl}
+% \usepackage[final,workshop]{automl}
+%
+% To compile for the ABCD track, add the [abcd] option:
+%
+% \usepackage[abcdtrack]{automl}
+% \usepackage[final,abcdtrack]{automl}
+%
+%
+% To compile a pre-print version that can be uploaded to arXiv, add a [preprint] option:
+%
+% \usepackage[preprint]{automl}
+%
+% The [hidesupplement] option may be used to hide the supplementary material from any of the
+% above commands, e.g.:
+%
+% \usepackage[hidesupplement,final,workshop]{automl}
+%
 
 \usepackage[hidesupplement]{automl}
 
