@@ -17,11 +17,24 @@
 \DeclareOption{final}{%
   \@submissionfalse
 }
+
+% declare preprint option, which creates a version that can be uploaded to preprint repositories, e.g. arXiv.
+\newif\if@preprint\@preprintfalse
+\DeclareOption{preprint}{%
+  \@preprinttrue
+  \@submissionfalse
+}
+
+% declare finalabcd option, which creates camera-ready copy for the ABCD track
+\newif\if@abcdtrack\@abcdtrackfalse
+\DeclareOption{abcdtrack}{%
+  \@abcdtracktrue
+}
+
 % declare finalworkshop option, which creates camera-ready copy for the workshop track
 \newif\if@workshop\@workshopfalse
-\DeclareOption{finalworkshop}{%
+\DeclareOption{workshop}{%
   \@workshoptrue
-  \@submissionfalse
 }
 % declare hidesupplement option, which hides supplemental material
 \newif\if@hidesupplement\@hidesupplementfalse
@@ -63,10 +76,20 @@
       }{}
   }
 \else
-  \if@workshop
-    \newcommand{\c@nferencestring}{AutoML \@utomlyear{} Workshop Track}
+  \newcommand{\c@nferencestring}{AutoML \@utomlyear}
+\fi
+
+\if@workshop
+  \let\oldconfstr\c@nferencestring
+  \renewcommand{\c@nferencestring}{\oldconfstr{} Workshop Track}
+\else
+  \if@preprint
+    \renewcommand{\c@nferencestring}{Preprint. Under review.}
   \else
-    \newcommand{\c@nferencestring}{AutoML \@utomlyear}
+    \if@abcdtrack
+      \let\oldconfstr\c@nferencestring
+      \renewcommand{\c@nferencestring}{\oldconfstr{} ABCD Track}
+    \fi
   \fi
 \fi
 
