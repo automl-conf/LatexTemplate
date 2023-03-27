@@ -88,7 +88,7 @@
   \else
     \if@abcdtrack
       \let\oldconfstr\c@nferencestring
-      \renewcommand{\c@nferencestring}{\oldconfstr{} ABCD Track}
+      \renewcommand{\c@nferencestring}{\oldconfstr{} Apps, Benchmarks, Challenges, and Datasets Track}
     \fi
   \fi
 \fi
@@ -119,8 +119,13 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}%
   \fancypagestyle{plain}{%
-    \fancyfoot[L]{\small\c@nferencestring}
-    \fancyfoot[R]{\small\textcopyright\,\@utomlyear\ the authors, released under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}}
+    \if@abcdtrack
+      \fancyfoot[L]{\scriptsize\c@nferencestring}
+      \fancyfoot[R]{\scriptsize\textcopyright\,\@utomlyear\ the authors, released under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}}
+    \else
+      \fancyfoot[L]{\small\c@nferencestring}
+      \fancyfoot[R]{\small\textcopyright\,\@utomlyear\ the authors, released under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}}
+    \fi
   }
   \pagestyle{fancy}
   \@ifpackageloaded{fullpage}
