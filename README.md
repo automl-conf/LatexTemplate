@@ -12,8 +12,9 @@ Latex Template for [AutoML-Conf](https://www.automl.cc)
 
 For questions and bug reports, please file issues at https://github.com/automl-conf/LatexTemplate/issues
 
-## Authors
+## Contributors
 
 * Roman Garnett
 * Frank Hutter
 * Marius Lindauer
+* Jake Gardner
