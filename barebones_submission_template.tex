@@ -16,8 +16,8 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
-% With no package options, the submission will be anonymized, the supplemental
-% material will be suppressed, and line numbers will be added to the manuscript.
+% With no package options, the submission will be anonymized,
+% and line numbers will be added to the manuscript.
 %
 % To compile a non-anonymized camera-ready version, add the [final] option:
 %
@@ -44,7 +44,7 @@
 % \usepackage[hidesupplement,final,workshop]{automl}
 %
 
-\usepackage[hidesupplement]{automl}
+\usepackage{automl}
 
 % You may use any reference style as long as you are consistent throughout the
 % document. As a default we suggest author--year citations; for bibtex and
@@ -128,8 +128,21 @@
 \begin{abstract}
 \end{abstract}
 
-\section{Broader Impact Statement}
+% ==== Formatting Instructions
+% The page limit for the main paper is 9 pages; this includes the broader impact 
+% statement but not the submission checklist, references, or appendix. 
+% The broader impact statement and submission checklist are mandatory at both 
+% submission time and in the camera ready. References and supplemental materials
+% are not limited in length. Accepted papers will be allowed to add an additional page 
+% of content to the main paper to react to reviewer feedback. 
+% This additional content may in fact be added during the rebuttal phase as authors 
+% interact with the reviewers to ensure acceptance decisions can be made regarding 
+% near-camera-ready work.
 
+\section{Example Section} % The Example Section can be removed.
+
+
+\section{Broader Impact Statement}
 % The 9 pages allocated for the main paper must include a broader impact
 % statement regarding the approach, datasets and applications proposed/used in
 % your paper. It should reflect on the environmental, ethical and societal
@@ -151,9 +164,29 @@
 %
 % https://medium.com/@GovAI/a-guide-to-writing-the-neurips-impact-statement-4293b723f832
 
-\section{Submission Checklist}
+% content will be automatically hidden during submission
+\begin{acknowledgements}
 
-% The submission checklist is a combination of the NeurIPS '21 checklist:
+\end{acknowledgements}
+
+% ==== Bibliography
+% print bibliography -- for bibtex / natbib, use:
+
+% \bibliography{...}
+
+% and for biber / biblatex, use:
+
+% \printbibliography
+
+% supplemental material -- everything hereafter will be suppressed during
+% submission time if the hidesupplement option is provided!
+
+\newpage 
+\section*{Submission Checklist}
+% The paper must include a submission checklist. The submission checklist does
+% not count towards the page limit and must be included at submission and camera-ready time. 
+%
+% The following submission checklist is a combination of the NeurIPS '21 checklist:
 %
 %   https://neurips.cc/Conferences/2021/PaperInformation/PaperChecklist
 %
@@ -361,21 +394,9 @@
   \end{enumerate}
   %
 \end{enumerate}
-% content will be automatically hidden during submission
-\begin{acknowledgements}
 
-\end{acknowledgements}
-
-% print bibliography -- for bibtex / natbib, use:
-
-% \bibliography{...}
-
-% and for biber / biblatex, use:
-
-% \printbibliography
-
-% supplemental material -- everything hereafter will be suppressed during
-% submission time if the hidesupplement option is provided!
+\newpage
 \appendix
+\section{Example Appendix} % The Example Appendix can be removed.
 
 \end{document}
