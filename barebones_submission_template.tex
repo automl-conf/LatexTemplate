@@ -16,8 +16,8 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
-% With no package options, the submission will be anonymized, the supplemental
-% material will be suppressed, and line numbers will be added to the manuscript.
+% With no package options, the submission will be anonymized,
+% and line numbers will be added to the manuscript.
 %
 % To compile a non-anonymized camera-ready version, add the [final] option:
 %
@@ -44,7 +44,7 @@
 % \usepackage[hidesupplement,final,workshop]{automl}
 %
 
-\usepackage[hidesupplement]{automl}
+\usepackage{automl}
 
 % You may use any reference style as long as you are consistent throughout the
 % document. As a default we suggest author--year citations; for bibtex and
@@ -128,8 +128,21 @@
 \begin{abstract}
 \end{abstract}
 
-\section{Broader Impact Statement}
+% ==== Formatting Instructions
+% The page limit for the main paper is 9 pages; this includes the broader impact 
+% statement but not the submission checklist, references, or appendix. 
+% The broader impact statement and submission checklist are mandatory at both 
+% submission time and in the camera ready. References and supplemental materials
+% are not limited in length. Accepted papers will be allowed to add an additional page 
+% of content to the main paper to react to reviewer feedback. 
+% This additional content may in fact be added during the rebuttal phase as authors 
+% interact with the reviewers to ensure acceptance decisions can be made regarding 
+% near-camera-ready work.
 
+\section{Example Section} % The Example Section can be removed.
+
+
+\section{Broader Impact Statement}
 % The 9 pages allocated for the main paper must include a broader impact
 % statement regarding the approach, datasets and applications proposed/used in
 % your paper. It should reflect on the environmental, ethical and societal
@@ -151,9 +164,29 @@
 %
 % https://medium.com/@GovAI/a-guide-to-writing-the-neurips-impact-statement-4293b723f832
 
-\section{Submission Checklist}
+% content will be automatically hidden during submission
+\begin{acknowledgements}
 
-% The submission checklist is a combination of the NeurIPS '21 checklist:
+\end{acknowledgements}
+
+% ==== Bibliography
+% print bibliography -- for bibtex / natbib, use:
+
+% \bibliography{...}
+
+% and for biber / biblatex, use:
+
+% \printbibliography
+
+% supplemental material -- everything hereafter will be suppressed during
+% submission time if the hidesupplement option is provided!
+
+\newpage 
+\section*{Submission Checklist}
+% The paper must include a submission checklist. The submission checklist does
+% not count towards the page limit and must be included at submission and camera-ready time. 
+%
+% The following submission checklist is a combination of the NeurIPS '21 checklist:
 %
 %   https://neurips.cc/Conferences/2021/PaperInformation/PaperChecklist
 %
@@ -209,21 +242,8 @@
     %
     \answerTODO{}
     %
-  \item Have you read the ethics author's and review guidelines and ensured that
-    your paper conforms to them? \url{https://automl.cc/ethics-accessibility/}
-    %
-    \answerTODO{}
-    %
-  \end{enumerate}
-  %
-\item If you are including theoretical results\dots
-  %
-  \begin{enumerate}
-  \item Did you state the full set of assumptions of all theoretical results?
-    %
-    \answerTODO{}
-    %
-  \item Did you include complete proofs of all theoretical results?
+  \item Did you read the ethics review guidelines and ensure that your paper
+    conforms to them? \url{https://2022.automl.cc/ethics-accessibility/}
     %
     \answerTODO{}
     %
@@ -232,65 +252,33 @@
 \item If you ran experiments\dots
   %
   \begin{enumerate}
-  \item Did you include the code, data, and instructions needed to reproduce the
-    main experimental results, including all requirements (e.g.,
-    \texttt{requirements.txt} with explicit version), an instructive
-    \texttt{README} with installation, and execution commands (either in the
-    supplemental material or as a \textsc{url})?
+  \item Did you use the same evaluation protocol for all methods being compared (e.g., 
+    same benchmarks, data (sub)sets, available resources)? 
     %
     \answerTODO{}
     %
-  \item Did you include the raw results of running the given instructions on the
-    given code and data?
+  \item Did you specify all the necessary details of your evaluation (e.g., data splits,
+    pre-processing, search spaces, hyperparameter tuning)?
     %
     \answerTODO{}
     %
-  \item Did you include scripts and commands that can be used to generate the
-    figures and tables in your paper based on the raw results of the code, data,
-    and instructions given?
+  \item Did you repeat your experiments (e.g., across multiple random seeds or splits) to account for the impact of randomness in your methods or data?
     %
     \answerTODO{}
     %
-  \item Did you ensure sufficient code quality such that your code can be safely
-    executed and the code is properly documented?
+  \item Did you report the uncertainty of your results (e.g., the variance across random seeds or splits)?
     %
     \answerTODO{}
     %
-  \item Did you specify all the training details (e.g., data splits,
-    pre-processing, search spaces, fixed hyperparameter settings, and how they
-    were chosen)?
-    %
-    \answerTODO{}
-    %
-  \item Did you ensure that you compared different methods (including your own)
-    exactly on the same benchmarks, including the same datasets, search space,
-    code for training and hyperparameters for that code?
-    %
-    \answerTODO{}
-    %
-  \item Did you run ablation studies to assess the impact of different
-    components of your approach?
-    %
-    \answerTODO{}
-    %
-  \item Did you use the same evaluation protocol for the methods being compared?
-    %
-    \answerTODO{}
-    %
-  \item Did you compare performance over time?
-    %
-    \answerTODO{}
-    %
-  \item Did you perform multiple runs of your experiments and report random seeds?
-    %
-    \answerTODO{}
-    %
-  \item Did you report error bars (e.g., with respect to the random seed after
-    running experiments multiple times)?
+  \item Did you report the statistical significance of your results?
     %
     \answerTODO{}
     %
   \item Did you use tabular or surrogate benchmarks for in-depth evaluations?
+    %
+    \answerTODO{}
+    %
+  \item Did you compare performance over time and describe how you selected the maximum duration?
     %
     \answerTODO{}
     %
@@ -299,39 +287,75 @@
     %
     \answerTODO{}
     %
-  \item Did you report how you tuned hyperparameters, and what time and
-    resources this required (if they were not automatically tuned by your AutoML
-    method, e.g. in a \textsc{nas} approach; and also hyperparameters of your
-    own method)?
+  \item Did you run ablation studies to assess the impact of different
+    components of your approach?
     %
     \answerTODO{}
     %
   \end{enumerate}
   %
-\item If you are using existing assets (e.g., code, data, models) or
-  curating/releasing new assets\dots
+\item With respect to the code used to obtain your results\dots
   %
   \begin{enumerate}
-  \item If your work uses existing assets, did you cite the creators?
+\item Did you include the code, data, and instructions needed to reproduce the
+    main experimental results, including all requirements (e.g.,
+    \texttt{requirements.txt} with explicit versions), random seeds, an instructive
+    \texttt{README} with installation, and execution commands (either in the
+    supplemental material or as a \textsc{url})?
     %
     \answerTODO{}
     %
-  \item Did you mention the license of the assets?
+  \item Did you include a minimal example to replicate results on a small subset
+    of the experiments or on toy data?
     %
     \answerTODO{}
     %
-  \item Did you include any new assets either in the supplemental material or as
-    a \textsc{url}?
+  \item Did you ensure sufficient code quality and documentation so that someone else 
+    can execute and understand your code?
+    %
+    \answerTODO{}
+    %
+  \item Did you include the raw results of running your experiments with the given
+    code, data, and instructions?
+    %
+    \answerTODO{}
+    %
+  \item Did you include the code, additional data, and instructions needed to generate
+    the figures and tables in your paper based on the raw results?
+    %
+    \answerTODO{}
+    %
+  \end{enumerate}
+  %
+\item If you used existing assets (e.g., code, data, models)\dots
+  %
+  \begin{enumerate}
+  \item Did you cite the creators of used assets?
     %
     \answerTODO{}
     %
   \item Did you discuss whether and how consent was obtained from people whose
-    data you're using/curating?
+    data you're using/curating if the license requires it?
     %
     \answerTODO{}
     %
   \item Did you discuss whether the data you are using/curating contains
     personally identifiable information or offensive content?
+    %
+    \answerTODO{}
+    %
+  \end{enumerate}
+  %
+\item If you created/released new assets (e.g., code, data, models)\dots
+  %
+  \begin{enumerate}
+    %
+    \item Did you mention the license of the new assets (e.g., as part of your code submission)?
+    %
+    \answerTODO{}
+    %
+    \item Did you include the new assets either in the supplemental material or as
+    a \textsc{url} (to, e.g., GitHub or Hugging Face)?
     %
     \answerTODO{}
     %
@@ -356,23 +380,23 @@
     \answerTODO{}
     %
   \end{enumerate}
+\item If you included theoretical results\dots
+  %
+  \begin{enumerate}
+  \item Did you state the full set of assumptions of all theoretical results?
+    %
+    \answerTODO{}
+    %
+  \item Did you include complete proofs of all theoretical results?
+    %
+    \answerTODO{}
+    %
+  \end{enumerate}
+  %
 \end{enumerate}
 
-% content will be automatically hidden during submission
-\begin{acknowledgements}
-
-\end{acknowledgements}
-
-% print bibliography -- for bibtex / natbib, use:
-
-% \bibliography{...}
-
-% and for biber / biblatex, use:
-
-% \printbibliography
-
-% supplemental material -- everything hereafter will be suppressed during
-% submission time if the hidesupplement option is provided!
+\newpage
 \appendix
+\section{Example Appendix} % The Example Appendix can be removed.
 
 \end{document}
