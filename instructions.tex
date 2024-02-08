@@ -17,8 +17,9 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
+
 % With no package options, the submission will be anonymized, the supplemental
-% material will be suppressed, and line numbers will be added to the manuscript.
+% material will be visible, and line numbers will be added to the manuscript.
 %
 % To compile a non-anonymized camera-ready version, add the [final] option:
 %
@@ -29,13 +30,13 @@
 % \usepackage[workshop]{automl}
 % \usepackage[final,workshop]{automl}
 %
-% To compile for the ABCD track, add the [abcd] option:
+% To compile a single-blind submission, e.g. for the ABCD track, add the
+% [revealauthors] option:
 %
-% \usepackage[abcdtrack]{automl}
-% \usepackage[final,abcdtrack]{automl}
+% \usepackage[revealauthors]{automl}
 %
-%
-% To compile a pre-print version that can be uploaded to arXiv, add a [preprint] option:
+% To compile a non-anonymized pre-print version that can be uploaded to arXiv,
+% add the [preprint] option:
 %
 % \usepackage[preprint]{automl}
 %
@@ -43,7 +44,6 @@
 % above commands, e.g.:
 %
 % \usepackage[hidesupplement,final,workshop]{automl}
-%
 
 \usepackage[final]{automl}
 
@@ -91,24 +91,40 @@
 % multiple affiliations; e.g.:
 %
 % \author[1,2]{\nameemail{Anonymous}{anonymous@example.com}}
-
-\author[1]{\nameemail{Author 1}{email1@example.com}}
-\author[2,3]{\nameemail{Author 2}{email2@example.com}}
-\author[3]{\nameemail{Author 3}{email3@example.com}}
-\author[4]{\nameemail{Author 4}{email4@example.com}}
-
+%
+% the list might continue:
+% \author[2,3]{\nameemail{Author 2}{email2@example.com}}
+% \author[3]{\nameemail{Author 3}{email3@example.com}}
+%
 % if you need to force a linebreak in the author list, prepend an \author entry
 % with \\:
-
-\author[3]{\\\nameemail{Author 5}{email5@example.com}}
-
+%
+% \author[1,2,3]{\\\nameemail{Author 4}{email4@example.com}}
+%
 % Specify corresponding affiliations after authors, referring to counter used in
 % \author:
+%
+% \affil[1]{Institution 1}
+%
+% the list might continue:
+% \affil[2]{Institution 2}
+% \affil[3]{Institution 3}
+%
+% this system may also be used to add additional footnotes, e.g. to indicate
+% equal contributions. Here is an example:
+%
+% \author[1,$\ast$]{\nameemail{Author 1}{email1@example.com}}
+% \author[1,$\ast$]{\nameemail{Author 2}{email2@example.com}}
+% \author[2]{\nameemail{Author 3}{email3@example.com}}
+%
 
+\author[1,$\ast$]{\nameemail{Author 1}{email1@example.com}}
+\author[1,2,$\ast$]{\nameemail{Author 2}{email2@example.com}}
+\author[2]{\nameemail{Author 3}{email3@example.com}}
+
+\affil[$\ast$]{Equal contribution.}
 \affil[1]{Institution 1}
 \affil[2]{Institution 2}
-\affil[3]{Institution 3}
-\affil[4]{Institution 4}
 
 % define PDF metadata, aids in accessibility of the resulting PDF
 \hypersetup{%
@@ -144,20 +160,26 @@ A barebones submission is also available as
 \section{Package Options}
 
 With no options, the \texttt{automl} package prepares an anonymized manuscript
-with hidden supplemental material. Two options are supported changing this
-behavior:
+ready for submission to any track of the main conference (i.e., the methods or
+\textsc{abcd} tracks for AutoML 2024). Several options are supported changing
+this behavior:
 \begin{itemize}
-\item \texttt{final} -- produces non-anonymized camera-ready version for
-  distribution and/or publication in the main conference track
-\item \texttt{finalworkshop} -- produces non-anonymized camera-ready version for
-  distribution and/or publication in the workshop track
+\item \texttt{revealauthors} -- produces a non-anonymized manuscript for
+  single-blind submission, e.g. to the ABCD track
+\item \texttt{workshop} -- produces a manuscript for submission and/or
+  publication in the workshop track
+\item \texttt{preprint} -- produces a non-anonymized manuscript for
+  preliminary (i.e., pre-acceptance) distribution, e.g. in arXiv
+\item \texttt{final} -- produces a non-anonymized manuscript for distribution
+  and/or publication in the proceedings
 \item \texttt{hidesupplement} -- hides supplementary material (following
   \verb|\appendix|); for example, for submitting or distributing the main paper
   without supplement
 \end{itemize}
-Note that \texttt{final} or \texttt{finalworkshop} may be used in combination
-with \texttt{hidesupplement} to prepare a non-anonymized version of the main
-paper with hidden supplement.
+These options may be combined. For example, \texttt{final} or \texttt{workshop}
+may be used together to create a camera-ready manuscript for the workshop track,
+and \texttt{hidesupplement} can be used in combination with any other flags to
+hide the supplemental material.
 
 \section{Supplemental Material}
 
@@ -195,7 +217,9 @@ reference using \verb|\citet|, as \citet{example_book} also demonstrated.
 \section{Tables}
 
 We recommend the \texttt{booktabs} package for creating tables, as demonstrated
-in Table \ref{example_table}. Note that table captions appear \emph{above} tables.
+in Table \ref{example_table}.
+
+Table captions should appear \emph{above} tables.
 
 \begin{table}
   \caption{An example table using the \texttt{booktabs} package.}
@@ -219,7 +243,9 @@ The \texttt{automl} style loads the \texttt{subcaption} package, which may be
 used to create and caption subfigures. Please note that this is
 \emph{incompatible} with the (obsolete and deprecated) \texttt{subfigure}
 package. A figure with subfigures is demonstrated in Figure
-\ref{example_figure}. Note that figure captions appear \emph{below} figures.
+\ref{example_figure}.
+
+Figure captions should appear \emph{below} figures.
 
 Please ensure that all text appearing in figures (axis labels, legends, etc.)
 is legible.
@@ -267,19 +293,19 @@ with \verb|\begin{algorithm} ... \end{algorithm}|. This environment supports
 \section{Adding Acknowledgments}
 
 You may add acknowledgments of funding, etc.\ using the \texttt{acknowledgments}
-environment. Acknowledgments will be automatically commented out at submission
-time. An example is given below in the source code for this document; it will be
-hidden in the \textsc{pdf} unless the \texttt{final} or \texttt{finalworkshop}
-option is given.
+environment. Acknowledgments will be automatically commented out in anonymized
+manuscripts (that is, if the \texttt{final} or \texttt{preprint} options are not
+given). An example is given below in the source code for this document; it will
+be hidden in the \textsc{pdf} unless the \texttt{final} or
+\texttt{finalworkshop} option is given.
 
 \section{Required Material}
 
-All submissions must include a discussion on limitations and a broader impact
-statement; and a \textbf{Reproducibility Checklist} in their manuscripts, both
-at submission and camera-ready time.
-The discussion of limitations and broader impact is part of the 9 pages allocated
-to the main paper (there is no page limitation for references and appendices), while
-the reproducibility checklist is not.
+All submissions must include a broader impact statement and a
+\textbf{Reproducibility Checklist} in their manuscripts, both at submission and
+camera-ready time.  The discussion of limitations and broader impact is part of
+the 9 pages allocated to the main paper (there is no page limitation for
+references and appendices), while the reproducibility checklist is not.
 
 \section{Broader Impact Statement}
 
@@ -293,12 +319,13 @@ If authors have reflected on their work and determined that there are no likely
 negative broader impacts, they may use the following statement:
 
 \begin{displayquote}
-After careful reflection, the authors have determined that this work presents no notable
-negative impacts to society or the environment.
+  After careful reflection, the authors have determined that this work presents no notable
+  negative impacts to society or the environment.
 \end{displayquote}
 
-This section is included in the template as a default, but you can also place these
-discussions anywhere else in the main paper, e.g., in the introduction/future work.
+A standalone section for the broader impact statement is included in the
+template by default, but you can also place this discussion anywhere else in the
+paper, e.g., in the introduction or a future work section.
 
 The Centre for the Governance of AI has written an excellent guide for writing
 good broader impact statements (for the NeurIPS conference) that may be a useful
@@ -306,19 +333,38 @@ resource for AutoML authors.%
 %
 \footnote{\url{https://medium.com/@GovAI/a-guide-to-writing-the-neurips-impact-statement-4293b723f832}}
 
-\section{Submission Checklist}
+\begin{acknowledgements}
+  The authors have many people to thank! This material will be automatically
+  hidden for submissions, e.g., if the \texttt{final} or \texttt{preprint}
+  options are not given.
+\end{acknowledgements}
 
-All authors must include a section with the AutoML \textbf{Submission
-Checklist} in their manuscripts, both at submission and camera-ready time.
-The submission checklist is a combination of the
+% print bibliography -- for bibtex / natbib, use:
+
+\bibliography{example}
+
+% and for biber / biblatex, use:
+
+% \printbibliography
+
+% supplemental material -- everything hereafter will be suppressed during
+% submission time if the hidesupplement option is provided!
+
+\newpage
+\section*{Submission Checklist}
+All submissions must include a section containing the AutoML submission
+checklist, shown below. The submission checklist does not count towards the page
+limit and must be included at submission and camera-ready time.  The submission
+checklist draws upon related submission checklists:
 %
 \href{https://neurips.cc/Conferences/2022/PaperInformation/PaperChecklist}
-     {NeurIPS '22 checklist}
+     {the NeurIPS '22 checklist}
 %
 and the
 \href{https://www.automl.org/wp-content/uploads/NAS/NAS_checklist.pdf}
      {\textsc{nas} checklist}.
 %
+
 For each question, change the default \verb|\answerTODO{}| (typeset \answerTODO)
 to
 \verb|\answerYes{[justification]}| (typeset \answerYes),
@@ -331,23 +377,26 @@ description.  For example:
 \item Did you include the license of the code and datasets? \answerYes{See
   Section~\ref{sec:code}.}
 \item Did you include all the code for running experiments? \answerNo{We include
-  the code we wrote, but it depends on proprietary libraries for executing on a
-  compute cluster and as such will not be runnable without modifications. We
-  also include a runnable sequential version of the code that we also report
-  experiments in the paper with.}
+  the code we wrote for conducting the experiments, but complete replication
+  depends on proprietary libraries for executing on a private compute
+  cluster. The code therefore is not runnable without modification. To
+  compensate, we provide a runnable but non-parallelized version of the code
+  that could replicate the results at the expense of a greater wall-clock time.}
 \item Did you include the license of the datasets? \answerNA{Our experiments
   were conducted on publicly available datasets and we have not introduced new
   datasets.}
 \end{itemize}
 Please note that if you answer a question with \verb|\answerNo{}|, we expect
-that you compensate for it (e.g., if you cannot provide the full evaluation
-code, you should at least provide code for a minimal reproduction of the main
-insights of your paper).
+that you provide an explanation and/or compensation for the omission. For
+example, if you cannot provide complete evaluation code for some reason, you
+might instead provide code for a minimal reproduction of the main insights of
+your paper.
 
 Please do not modify the questions and only use the provided macros for your
-answers. Note that this section does not count towards the page limit. In your
-paper, please delete this instructions block and only keep the Checklist section
-heading above along with the questions/answers below.
+answers. Note that the submission checklist does not count towards the page
+limit. If you choose to modify \texttt{instructions.tex}, please delete these
+instructions and only keep the Submission Checklist section heading above along
+with the questions/answers below.
 
 \begin{enumerate}
 \item For all authors\dots
@@ -376,8 +425,8 @@ heading above along with the questions/answers below.
 \item If you ran experiments\dots
   %
   \begin{enumerate}
-  \item Did you use the same evaluation protocol for all methods being compared (e.g., 
-    same benchmarks, data (sub)sets, available resources)? 
+  \item Did you use the same evaluation protocol for all methods being compared (e.g.,
+    same benchmarks, data (sub)sets, available resources)?
     %
     \answerTODO{}
     %
@@ -434,7 +483,7 @@ heading above along with the questions/answers below.
     %
     \answerTODO{}
     %
-  \item Did you ensure sufficient code quality and documentation so that someone else 
+  \item Did you ensure sufficient code quality and documentation so that someone else
     can execute and understand your code?
     %
     \answerTODO{}
@@ -518,24 +567,11 @@ heading above along with the questions/answers below.
   \end{enumerate}
   %
 \end{enumerate}
-\begin{acknowledgements}
-  The authors have many people to thank!
-\end{acknowledgements}
 
-% print bibliography -- for bibtex / natbib, use:
-
-\bibliography{example}
-
-% and for biber / biblatex, use:
-
-% \printbibliography
-
-% supplemental material -- everything hereafter will be suppressed during
-% submission time if the hidesupplement option is provided!
+\newpage
 \appendix
-
 \section{Proof of Theorem 1}
 
-This material will be hidden if \texttt{hidesupplement} is provided.
+This material will be hidden if the \texttt{hidesupplement} option is provided.
 
 \end{document}

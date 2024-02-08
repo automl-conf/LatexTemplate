@@ -7,15 +7,21 @@
 % Please file any issues you may have there.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{automl}[2022/11/18 AutoML submission/camera-ready style file]
+\ProvidesPackage{automl}[2024/02/08 AutoML submission/camera-ready style file]
 
 % change this every year for notice string
 \newcommand{\@utomlyear}{2024}
 
-% declare final option, which creates camera-ready copy for the main track
+% declare final option, which creates camera-ready copy
 \newif\if@submission\@submissiontrue
 \DeclareOption{final}{%
   \@submissionfalse
+}
+
+% declare revealauthors option, which creates a non-anonymized submission
+\newif\if@revealauthors\@revealauthorsfalse
+\DeclareOption{revealauthors}{%
+  \@revealauthorstrue
 }
 
 % declare preprint option, which creates a version that can be uploaded to preprint repositories, e.g. arXiv.
@@ -25,18 +31,12 @@
   \@submissionfalse
 }
 
-% declare finalabcd option, which creates camera-ready copy for the ABCD track
-\newif\if@abcdtrack\@abcdtrackfalse
-\DeclareOption{abcdtrack}{%
-  \@abcdtracktrue
-  \@submissionfalse
-}
-
-% declare finalworkshop option, which creates camera-ready copy for the workshop track
+% declare workshop option, which creates a submission/camera-ready for the workshop track
 \newif\if@workshop\@workshopfalse
 \DeclareOption{workshop}{%
   \@workshoptrue
 }
+
 % declare hidesupplement option, which hides supplemental material
 \newif\if@hidesupplement\@hidesupplementfalse
 \DeclareOption{hidesupplement}{%
@@ -81,16 +81,11 @@
 \fi
 
 \if@workshop
-  \let\oldconfstr\c@nferencestring
-  \renewcommand{\c@nferencestring}{\oldconfstr{} Workshop Track}
+  \let\@ldconferencestring\c@nferencestring
+  \renewcommand{\c@nferencestring}{\@ldconferencestring{} Workshop Track}
 \else
   \if@preprint
     \renewcommand{\c@nferencestring}{Preprint. Under review.}
-  \else
-    \if@abcdtrack
-      \let\oldconfstr\c@nferencestring
-      \renewcommand{\c@nferencestring}{\oldconfstr{} Apps, Benchmarks, Challenges, and Datasets Track}
-    \fi
   \fi
 \fi
 
@@ -101,7 +96,7 @@
 
 % set page geometry
 \ifx\DeclareHookRule\@undefined\else
-\DeclareHookRule{begindocument}{geometry}{before}{.}
+  \DeclareHookRule{begindocument}{geometry}{before}{.}
 \fi
 \usepackage[verbose=true,letterpaper]{geometry}
 \AtBeginDocument{
@@ -120,13 +115,8 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}%
   \fancypagestyle{plain}{%
-    \if@abcdtrack
-      \fancyfoot[L]{\scriptsize\c@nferencestring}
-      \fancyfoot[R]{\scriptsize\textcopyright\,\@utomlyear\ the authors, released under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}}
-    \else
-      \fancyfoot[L]{\small\c@nferencestring}
-      \fancyfoot[R]{\small\textcopyright\,\@utomlyear\ the authors, released under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}}
-    \fi
+    \fancyfoot[L]{\small\c@nferencestring}
+    \fancyfoot[R]{\small\textcopyright\,\@utomlyear\ the authors, released under \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0}}
   }
   \pagestyle{fancy}
   \@ifpackageloaded{fullpage}
@@ -261,8 +251,12 @@
   \middletitleb@r
   \thispagestyle{plain}
   \if@submission
-    \renewcommand{\AB@authlist}{\Authfont{Anonymous}\AB@authnote{1}}
-    \renewcommand{\AB@affillist}{\AB@affilnote{1}\Affilfont{Anonymous Institution}}
+    \if@revealauthors
+      % single blind
+    \else
+      \renewcommand{\AB@authlist}{\Authfont{Anonymous}\AB@authnote{1}}
+      \renewcommand{\AB@affillist}{\AB@affilnote{1}\Affilfont{Anonymous Institution}}
+    \fi
   \fi
   \frenchspacing%
   \list{}{\leftmargin=1em\topsep=\z@}\item[]\raggedright\@author\endlist%
@@ -373,9 +367,15 @@
 \usepackage{xcolor}
 \usepackage{xspace}
 
-\newcommand{\answerYes}[1]{{\textcolor{blue}{[Yes]}\xspace#1}}
-\newcommand{\answerNo}[1]{{\textcolor{orange}{[No]}\xspace#1}}
-\newcommand{\answerNA}[1]{{\textcolor{gray}{[N/A]}\xspace#1}}
-\newcommand{\answerTODO}{\textcolor{red}{\textbf{[TODO]}}}
+% https://colorbrewer2.org/#type=qualitative&scheme=Paired&n=11 Cynthia Brewer
+\definecolor{answerYesColor}{RGB}{31,120,180}
+\definecolor{answerNoColor}{RGB}{227,26,28}
+\definecolor{answerNAColor}{RGB}{32, 32, 32}
+\definecolor{answerTODOColor}{RGB}{255,127,0}
+
+\newcommand{\answerYes}[1]{{\textcolor{answerYesColor}{[Yes]}\xspace#1}}
+\newcommand{\answerNo}[1]{{\textcolor{answerNoColor}{[No]}\xspace#1}}
+\newcommand{\answerNA}[1]{{\textcolor{answerNAColor}{[N/A]}\xspace#1}}
+\newcommand{\answerTODO}{\textcolor{answerTODOColor}{\textbf{[TODO]}}}
 
 \endinput

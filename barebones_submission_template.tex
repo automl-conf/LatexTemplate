@@ -16,8 +16,8 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
-% With no package options, the submission will be anonymized,
-% and line numbers will be added to the manuscript.
+% With no package options, the submission will be anonymized, the supplemental
+% material will be visible, and line numbers will be added to the manuscript.
 %
 % To compile a non-anonymized camera-ready version, add the [final] option:
 %
@@ -28,13 +28,13 @@
 % \usepackage[workshop]{automl}
 % \usepackage[final,workshop]{automl}
 %
-% To compile for the ABCD track, add the [abcd] option:
+% To compile a single-blind submission, e.g. for the ABCD track, add the
+% [revealauthors] option:
 %
-% \usepackage[abcdtrack]{automl}
-% \usepackage[final,abcdtrack]{automl}
+% \usepackage[revealauthors]{automl}
 %
-%
-% To compile a pre-print version that can be uploaded to arXiv, add a [preprint] option:
+% To compile a non-anonymized pre-print version that can be uploaded to arXiv,
+% add the [preprint] option:
 %
 % \usepackage[preprint]{automl}
 %
@@ -42,7 +42,6 @@
 % above commands, e.g.:
 %
 % \usepackage[hidesupplement,final,workshop]{automl}
-%
 
 \usepackage{automl}
 
@@ -69,7 +68,7 @@
 % ]{biblatex}
 % \addbibresource{...}
 
-\title{Example Submission for AutoML 2023}
+\title{Example Submission for AutoML 2024}
 
 % The syntax for adding an author is
 %
@@ -85,12 +84,11 @@
 % the list might continue:
 % \author[2,3]{\nameemail{Author 2}{email2@example.com}}
 % \author[3]{\nameemail{Author 3}{email3@example.com}}
-% \author[4]{\nameemail{Author 4}{email4@example.com}}
 
 % if you need to force a linebreak in the author list, prepend an \author entry
 % with \\:
 
-% \author[3]{\\\nameemail{Author 5}{email5@example.com}}
+% \author[1,2,3]{\\\nameemail{Author 4}{email5@example.com}}
 
 % Specify corresponding affiliations after authors, referring to counter used in
 % \author:
@@ -100,9 +98,8 @@
 % the list might continue:
 % \affil[2]{Institution 2}
 % \affil[3]{Institution 3}
-% \affil[4]{Institution 4}
 %
-% this system may also be used to add additional footnotes, e.g. to indciate
+% this system may also be used to add additional footnotes, e.g. to indicate
 % equal contributions. Here is an example:
 %
 % \author[1,$\ast$]{\nameemail{Author 1}{email1@example.com}}
@@ -129,18 +126,18 @@
 \end{abstract}
 
 % ==== Formatting Instructions
-% The page limit for the main paper is 9 pages; this includes the broader impact 
-% statement but not the submission checklist, references, or appendix. 
-% The broader impact statement and submission checklist are mandatory at both 
+% The page limit for the main paper is 9 pages; this includes the broader impact
+% statement but not the submission checklist, references, or appendix.
+% The broader impact statement and submission checklist are mandatory at both
 % submission time and in the camera ready. References and supplemental materials
-% are not limited in length. Accepted papers will be allowed to add an additional page 
-% of content to the main paper to react to reviewer feedback. 
-% This additional content may in fact be added during the rebuttal phase as authors 
-% interact with the reviewers to ensure acceptance decisions can be made regarding 
+% are not limited in length. Accepted papers will be allowed to add an additional page
+% of content to the main paper to react to reviewer feedback.
+% This additional content may in fact be added during the rebuttal phase as authors
+% interact with the reviewers to ensure acceptance decisions can be made regarding
 % near-camera-ready work.
 
-\section{Example Section} % The Example Section can be removed.
-
+\section{Example Section}
+% This example section may be removed.
 
 \section{Broader Impact Statement}
 % The 9 pages allocated for the main paper must include a broader impact
@@ -164,9 +161,8 @@
 %
 % https://medium.com/@GovAI/a-guide-to-writing-the-neurips-impact-statement-4293b723f832
 
-% content will be automatically hidden during submission
 \begin{acknowledgements}
-
+  % content in acknowledgements will be automatically hidden during submission
 \end{acknowledgements}
 
 % ==== Bibliography
@@ -181,49 +177,54 @@
 % supplemental material -- everything hereafter will be suppressed during
 % submission time if the hidesupplement option is provided!
 
-\newpage 
+\newpage
 \section*{Submission Checklist}
-% The paper must include a submission checklist. The submission checklist does
-% not count towards the page limit and must be included at submission and camera-ready time. 
+
+% All submissions must include a section containing the AutoML submission
+% checklist, shown below. The submission checklist does not count towards the
+% page limit and must be included at submission and camera-ready time.  The
+% submission checklist draws upon related submission checklists:
 %
-% The following submission checklist is a combination of the NeurIPS '21 checklist:
-%
-%   https://neurips.cc/Conferences/2021/PaperInformation/PaperChecklist
-%
-% and the NAS checklist:
-%
-%   https://www.automl.org/wp-content/uploads/NAS/NAS_checklist.pdf
+% the NeurIPS '22 checklist: https://neurips.cc/Conferences/2022/PaperInformation/PaperChecklist
+%     and the NAS checklist: https://www.automl.org/wp-content/uploads/NAS/NAS_checklist.pdf
 %
 % For each question, change the default \answerTODO{} to either:
 %
 %     \answerYes{[justification]},
 %     \answerNo{[justification]}, or
 %     \answerNA{[justification]}.
+
+% *You must include a brief justification to your answer,} either by referencing
+% *the appropriate section of your paper or providing a brief inline
+% *description.* For example:
 %
-% *You must include a brief justification to your answer,* either by
-% referencing the appropriate section of your paper or providing a brief inline
-% description.  For example:
+% -  Did you include the license of the code and datasets?
 %
-% - Did you include the license of the code and datasets?
-%   \answerYes{See Section~\ref{sec:code}.}
+%    \answerYes{See Section~\ref{sec:code}.
 %
 % - Did you include all the code for running experiments?
-%   \answerNo{We include the code we wrote, but it depends on proprietary
-%   libraries for executing on a compute cluster and as such will not be
-%   runnable without modifications. We also include a runnable sequential
-%   version of the code that we also report experiments in the paper with.}
+%
+%   \answerNo{We include the code we wrote for conducting the experiments, but
+%   complete replication depends on proprietary libraries for executing on a
+%   private compute cluster. The code therefore is not runnable without
+%   modification. To compensate, we provide a runnable but non-parallelized
+%   version of the code that could replicate the results at the expense of a
+%   greater wall-clock time.}
 %
 % - Did you include the license of the datasets?
-%   \answerNA{Our experiments were conducted on publicly available datasets and
-%   we did not introduce new datasets.}
 %
-% Please note that if you answer a question with \answerNo{}, we expect that you
-% compensate for it (e.g., if you cannot provide the full evaluation code, you
-% should at least provide code for a minimal reproduction of the main insights
-% of your paper).
+%   \answerNA{Our experiments were conducted on publicly available datasets and
+%   we have not introduced new datasets.}
+%
+% Please note that if you answer a question with \verb|\answerNo{}|, we expect
+% that you provide an explanation and/or compensation for the omission. For
+% example, if you cannot provide complete evaluation code for some reason, you
+% might instead provide code for a minimal reproduction of the main insights of
+% your paper.
 %
 % Please do not modify the questions and only use the provided macros for your
-% answers. Note that this section does not count towards the page limit.
+% answers. Note that the submission checklist does not count towards the page
+% limit.
 
 \begin{enumerate}
 \item For all authors\dots
@@ -252,8 +253,8 @@
 \item If you ran experiments\dots
   %
   \begin{enumerate}
-  \item Did you use the same evaluation protocol for all methods being compared (e.g., 
-    same benchmarks, data (sub)sets, available resources)? 
+  \item Did you use the same evaluation protocol for all methods being compared (e.g.,
+    same benchmarks, data (sub)sets, available resources)?
     %
     \answerTODO{}
     %
@@ -310,7 +311,7 @@
     %
     \answerTODO{}
     %
-  \item Did you ensure sufficient code quality and documentation so that someone else 
+  \item Did you ensure sufficient code quality and documentation so that someone else
     can execute and understand your code?
     %
     \answerTODO{}
@@ -397,6 +398,11 @@
 
 \newpage
 \appendix
-\section{Example Appendix} % The Example Appendix can be removed.
+
+% \supplemental material can be placed here; this material will be hidden if the
+% [hidesupplement] option is provided
+
+\section{Example Supplemental Section}
+% This example section may be removed.
 
 \end{document}
