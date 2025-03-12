@@ -37,9 +37,9 @@
   \@workshoptrue
 }
 % declare non-archival track
-\newif\if@nonArchival\@nonArchivalfalse
-\DeclareOption{nonArchival}{%
-  \@nonArchivaltrue
+\newif\if@shortpaper\@shortpaperfalse
+\DeclareOption{shortpaper}{%
+  \@shortpapertrue
 }
 
 
@@ -90,9 +90,9 @@
   \let\@ldconferencestring\c@nferencestring
   \renewcommand{\c@nferencestring}{\@ldconferencestring{} Workshop Track}
 \else
-    \if@nonArchival
+    \if@shortpaper
   \let\@ldconferencestring\c@nferencestring
-  \renewcommand{\c@nferencestring}{\@ldconferencestring{} Non-Archival Content Track}
+  \renewcommand{\c@nferencestring}{\@ldconferencestring{} Non-Archival Track}
     \fi
   \if@preprint
     \renewcommand{\c@nferencestring}{Preprint. Under review.}
