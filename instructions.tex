@@ -17,7 +17,6 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
-
 % With no package options, the submission will be anonymized, the supplemental
 % material will be visible, and line numbers will be added to the manuscript.
 %
@@ -298,9 +297,21 @@ manuscripts (that is, if the \texttt{final} or \texttt{preprint} options are not
 given). An example is given below in the source code for this document; it will
 be hidden in the \textsc{pdf} unless the \texttt{final} option is given.
 
+\begin{acknowledgements}
+   The authors have many people to thank! This material will be automatically
+   hidden for submissions, e.g., if the \texttt{final} or \texttt{preprint}
+   options are not given.
+ \end{acknowledgements}
+
+\bibliography{example}
+
+\newpage
 \section{[Optional] Submission Checklist}
-All submissions are welcome to include the AutoML submission checklist—\textbf{while not required, including the checklist may be beneficial during the reproducibility review process and for long-term impact}. If you choose to include the checklist, it will not count towards the page limit. The submission
-checklist draws upon related submission checklists:
+All submissions are welcome to include the AutoML submission checklist provided
+below. \textbf{While not required, including the checklist may be beneficial
+  during the reproducibility review process and for maximizing long-term
+  impact.} If you choose to include the checklist, it will not count towards the
+page limit. The submission checklist draws upon related submission checklists:
 %
 \href{https://neurips.cc/Conferences/2022/PaperInformation/PaperChecklist}
      {the NeurIPS '22 checklist}
@@ -316,7 +327,8 @@ to
 \verb|\answerNo{[justification]}| (typeset \answerNo), or
 \verb|\answerNA{[justification]}| (typeset \answerNA).
 We recommend including a brief justification to your answer, either by
-referencing the appropriate section of your paper or providing a brief inline description.  For example:
+referencing the appropriate section of your paper or providing a brief inline
+description.  For example:
 \begin{itemize}
 \item Did you include the license of the code and datasets? \answerYes{See
   Section~\ref{sec:code}.}
@@ -330,7 +342,10 @@ referencing the appropriate section of your paper or providing a brief inline de
   were conducted on publicly available datasets and we have not introduced new
   datasets.}
 \end{itemize}
-Please note that if you answer a question with \verb|\answerNo{}|, we recommend providing an explanation and/or compensation for the omission. For example, if you cannot provide complete evaluation code for some reason, you might instead provide code for a minimal reproduction of the main insights of your paper.
+Please note that if you answer a question with \verb|\answerNo{}|, we recommend
+providing an explanation and/or compensation for the omission. For example, if
+you cannot provide complete evaluation code for some reason, you might instead
+provide code for a minimal reproduction of the main insights of your paper.
 
 Please do not modify the questions and only use the provided macros for your
 answers. Note that the submission checklist does not count towards the page
@@ -356,7 +371,7 @@ with the questions/answers below.
     \answerTODO{}
     %
   \item Did you read the ethics review guidelines and ensure that your paper
-    conforms to them? \url{https://2022.automl.cc/ethics-accessibility/}
+    conforms to them? (see \url{https://2022.automl.cc/ethics-accessibility/})
     %
     \answerTODO{}
     %
@@ -366,20 +381,22 @@ with the questions/answers below.
   %
   \begin{enumerate}
   \item Did you use the same evaluation protocol for all methods being compared (e.g.,
-    same benchmarks, data (sub)sets, available resources)?
+    same benchmarks, data (sub)sets, available resources, etc.)?
     %
     \answerTODO{}
     %
   \item Did you specify all the necessary details of your evaluation (e.g., data splits,
-    pre-processing, search spaces, hyperparameter tuning)?
+    pre-processing, search spaces, hyperparameter tuning details and results, etc.)?
     %
     \answerTODO{}
     %
-  \item Did you repeat your experiments (e.g., across multiple random seeds or splits) to account for the impact of randomness in your methods or data?
+  \item Did you repeat your experiments (e.g., across multiple random seeds or
+    splits) to account for the impact of randomness in your methods or data?
     %
     \answerTODO{}
     %
-  \item Did you report the uncertainty of your results (e.g., the variance across random seeds or splits)?
+  \item Did you report the uncertainty of your results (e.g., the standard error
+    across random seeds or splits)?
     %
     \answerTODO{}
     %
@@ -387,11 +404,13 @@ with the questions/answers below.
     %
     \answerTODO{}
     %
-  \item Did you use enough repetitions, datasets, and/or benchmarks to support your claims?
+  \item Did you use enough repetitions, datasets, and/or benchmarks to support
+    your claims?
     %
     \answerTODO{}
     %
-  \item Did you compare performance over time and describe how you selected the maximum duration?
+  \item Did you compare performance over time and describe how you selected the
+    maximum runtime?
     %
     \answerTODO{}
     %
@@ -411,10 +430,10 @@ with the questions/answers below.
   %
   \begin{enumerate}
 \item Did you include the code, data, and instructions needed to reproduce the
-    main experimental results, including all requirements (e.g.,
+    main experimental results, including all dependencies (e.g.,
     \texttt{requirements.txt} with explicit versions), random seeds, an instructive
-    \texttt{README} with installation, and execution commands (either in the
-    supplemental material or as a \textsc{url})?
+    \texttt{README} with installation instructions, and execution commands
+    (either in the supplemental material or as a \textsc{url})?
     %
     \answerTODO{}
     %
@@ -429,7 +448,7 @@ with the questions/answers below.
     \answerTODO{}
     %
   \item Did you include the raw results of running your experiments with the given
-    code, data, and instructions (i.e., such that someone else can generate your plots)?
+    code, data, and instructions?
     %
     \answerTODO{}
     %
@@ -463,7 +482,8 @@ with the questions/answers below.
   %
   \begin{enumerate}
     %
-    \item Did you mention the license of the new assets (e.g., as part of your code submission)?
+    \item Did you mention the license of the new assets (e.g., as part of your
+    code submission)?
     %
     \answerTODO{}
     %
@@ -483,7 +503,7 @@ with the questions/answers below.
     \answerTODO{}
     %
   \item Did you describe any potential participant risks, with links to
-    Institutional Review Board (\textsc{irb}) approvals, if applicable?
+    institutional review board (\textsc{irb}) approvals, if applicable?
     %
     \answerTODO{}
     %
