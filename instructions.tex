@@ -24,10 +24,10 @@
 %
 % \usepackage[final]{automl}
 %
-% To compile for the non-archival content track, add the [nonArchival] option:
+% To compile for the non-archival content track, add the [shortpaper] option:
 %
-% \usepackage[nonArchival]{automl}
-% \usepackage[final,nonArchival]{automl}
+% \usepackage[shortpaper]{automl}
+% \usepackage[final,shortpaper]{automl}
 %
 % To compile a single-blind submission, e.g. for the ABCD track, add the
 % [revealauthors] option:
@@ -42,7 +42,7 @@
 % The [hidesupplement] option may be used to hide the supplementary material from any of the
 % above commands, e.g.:
 %
-% \usepackage[hidesupplement,final,nonArchival]{automl}
+% \usepackage[hidesupplement,final,shortpaper]{automl}
 
 \usepackage[final]{automl}
 
@@ -165,7 +165,7 @@ this behavior:
 \begin{itemize}
 \item \texttt{revealauthors} -- produces a non-anonymized manuscript for
   single-blind submission, e.g. to the ABCD track
-\item \texttt{nonArchival} -- produces a manuscript for submission and/or
+\item \texttt{shortpaper} -- produces a manuscript for submission and/or
   publication in the non-archival content track
 \item \texttt{preprint} -- produces a non-anonymized manuscript for
   preliminary (i.e., pre-acceptance) distribution, e.g. in arXiv
@@ -175,7 +175,7 @@ this behavior:
   \verb|\appendix|); for example, for submitting or distributing the main paper
   without supplement
 \end{itemize}
-These options may be combined. For example, \texttt{final} or \texttt{nonArchival}
+These options may be combined. For example, \texttt{final} or \texttt{shortpaper}
 may be used together to create a camera-ready manuscript for the non-archival content track,
 and \texttt{hidesupplement} can be used in combination with any other flags to
 hide the supplemental material.
