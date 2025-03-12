@@ -31,10 +31,10 @@
   \@submissionfalse
 }
 
-% declare workshop option, which creates a submission/camera-ready for the workshop track
-\newif\if@workshop\@workshopfalse
-\DeclareOption{workshop}{%
-  \@workshoptrue
+% declare shortpaper paper option, which creates a submission/camera-ready for the non-archival track
+\newif\if@shortpaper\@shortpaperfalse
+\DeclareOption{shortpaper}{%
+  \@shortpapertrue
 }
 
 % declare hidesupplement option, which hides supplemental material
@@ -80,9 +80,9 @@
   \newcommand{\c@nferencestring}{AutoML \@utomlyear}
 \fi
 
-\if@workshop
+\if@shortpaper
   \let\@ldconferencestring\c@nferencestring
-  \renewcommand{\c@nferencestring}{\@ldconferencestring{} Workshop Track}
+  \renewcommand{\c@nferencestring}{\@ldconferencestring{} Non-Archival Track}
 \else
   \if@preprint
     \renewcommand{\c@nferencestring}{Preprint. Under review.}

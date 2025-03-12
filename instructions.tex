@@ -25,10 +25,10 @@
 %
 % \usepackage[final]{automl}
 %
-% To compile for the workshop track, add the [workshop] option:
+% To compile for the non-archival track, add the [shortpaper] option:
 %
-% \usepackage[workshop]{automl}
-% \usepackage[final,workshop]{automl}
+% \usepackage[shortpaper]{automl}
+% \usepackage[final,shortpaper]{automl}
 %
 % To compile a single-blind submission, e.g. for the ABCD track, add the
 % [revealauthors] option:
@@ -43,7 +43,7 @@
 % The [hidesupplement] option may be used to hide the supplementary material from any of the
 % above commands, e.g.:
 %
-% \usepackage[hidesupplement,final,workshop]{automl}
+% \usepackage[hidesupplement,final,shortpaper]{automl}
 
 \usepackage[final]{automl}
 
@@ -166,8 +166,8 @@ this behavior:
 \begin{itemize}
 \item \texttt{revealauthors} -- produces a non-anonymized manuscript for
   single-blind submission, e.g. to the ABCD track
-\item \texttt{workshop} -- produces a manuscript for submission and/or
-  publication in the workshop track
+\item \texttt{shortpaper} -- produces a manuscript for submission and/or
+  publication in the non-archival track
 \item \texttt{preprint} -- produces a non-anonymized manuscript for
   preliminary (i.e., pre-acceptance) distribution, e.g. in arXiv
 \item \texttt{final} -- produces a non-anonymized manuscript for distribution
@@ -176,8 +176,8 @@ this behavior:
   \verb|\appendix|); for example, for submitting or distributing the main paper
   without supplement
 \end{itemize}
-These options may be combined. For example, \texttt{final} or \texttt{workshop}
-may be used together to create a camera-ready manuscript for the workshop track,
+These options may be combined. For example, \texttt{final} or \texttt{shortpaper}
+may be used together to create a camera-ready manuscript for the non-archival track,
 and \texttt{hidesupplement} can be used in combination with any other flags to
 hide the supplemental material.
 
@@ -296,8 +296,7 @@ You may add acknowledgments of funding, etc.\ using the \texttt{acknowledgments}
 environment. Acknowledgments will be automatically commented out in anonymized
 manuscripts (that is, if the \texttt{final} or \texttt{preprint} options are not
 given). An example is given below in the source code for this document; it will
-be hidden in the \textsc{pdf} unless the \texttt{final} or
-\texttt{finalworkshop} option is given.
+be hidden in the \textsc{pdf} unless the \texttt{final} option is given.
 
 \section{Required Material}
 
