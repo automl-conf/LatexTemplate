@@ -36,6 +36,12 @@
 \DeclareOption{workshop}{%
   \@workshoptrue
 }
+% declare non-archival track
+\newif\if@shortpaper\@shortpaperfalse
+\DeclareOption{shortpaper}{%
+  \@shortpapertrue
+}
+
 
 % declare hidesupplement option, which hides supplemental material
 \newif\if@hidesupplement\@hidesupplementfalse
@@ -84,6 +90,10 @@
   \let\@ldconferencestring\c@nferencestring
   \renewcommand{\c@nferencestring}{\@ldconferencestring{} Workshop Track}
 \else
+    \if@shortpaper
+  \let\@ldconferencestring\c@nferencestring
+  \renewcommand{\c@nferencestring}{\@ldconferencestring{} Non-Archival Track}
+    \fi
   \if@preprint
     \renewcommand{\c@nferencestring}{Preprint. Under review.}
   \fi

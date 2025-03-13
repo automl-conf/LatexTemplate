@@ -23,10 +23,10 @@
 %
 % \usepackage[final]{automl}
 %
-% To compile for the workshop track, add the [workshop] option:
+% To compile for the non-archival content track, add the [shortpaper] option:
 %
-% \usepackage[workshop]{automl}
-% \usepackage[final,workshop]{automl}
+% \usepackage[shortpaper]{automl}
+% \usepackage[final,shortpaper]{automl}
 %
 % To compile a single-blind submission, e.g. for the ABCD track, add the
 % [revealauthors] option:
@@ -41,7 +41,7 @@
 % The [hidesupplement] option may be used to hide the supplementary material from any of the
 % above commands, e.g.:
 %
-% \usepackage[hidesupplement,final,workshop]{automl}
+% \usepackage[hidesupplement,final,shortpaper]{automl}
 
 \usepackage{automl}
 
@@ -126,40 +126,13 @@
 \end{abstract}
 
 % ==== Formatting Instructions
-% The page limit for the main paper is 9 pages; this includes the broader impact
-% statement but not the submission checklist, references, or appendix.
-% The broader impact statement and submission checklist are mandatory at both
-% submission time and in the camera ready. References and supplemental materials
-% are not limited in length. Accepted papers will be allowed to add an additional page
-% of content to the main paper to react to reviewer feedback.
-% This additional content may in fact be added during the rebuttal phase as authors
-% interact with the reviewers to ensure acceptance decisions can be made regarding
-% near-camera-ready work.
+% The page limit for the main paper is 9 pages; this does not include the
+% references or appendix.  The references and appendix are not limited in
+% length. Accepted papers will be allowed to add an additional page of content
+% to the main paper to react to reviewer feedback.
 
 \section{Example Section}
 % This example section may be removed.
-
-\section{Broader Impact Statement}
-% The 9 pages allocated for the main paper must include a broader impact
-% statement regarding the approach, datasets and applications proposed/used in
-% your paper. It should reflect on the environmental, ethical and societal
-% implications of your work. The statement should require at most one page and
-% must be included both at submission and camera-ready time.
-%
-% If authors have reflected on their work and determined that there are no
-% likely negative broader impacts, they may use the following statement:
-%
-% After careful reflection, the authors have determined that this work presents
-% no notable negative impacts to society or the environment.
-%
-% This section is included in the template as a default, but you can also place these
-% discussions anywhere else in the main paper, e.g., in the introduction/future work.
-%
-% The Centre for the Governance of AI has written an excellent guide for writing
-% good broader impact statements (for the NeurIPS conference) that may be a
-% useful resource for AutoML-Conf authors:
-%
-% https://medium.com/@GovAI/a-guide-to-writing-the-neurips-impact-statement-4293b723f832
 
 \begin{acknowledgements}
   % content in acknowledgements will be automatically hidden during submission
@@ -179,52 +152,15 @@
 
 \newpage
 \section*{Submission Checklist}
+% The submission checklist is optional. If you choose not to include the
+% checklist, delete this section!
 
-% All submissions must include a section containing the AutoML submission
-% checklist, shown below. The submission checklist does not count towards the
-% page limit and must be included at submission and camera-ready time.  The
-% submission checklist draws upon related submission checklists:
-%
-% the NeurIPS '22 checklist: https://neurips.cc/Conferences/2022/PaperInformation/PaperChecklist
-%     and the NAS checklist: https://www.automl.org/wp-content/uploads/NAS/NAS_checklist.pdf
-%
-% For each question, change the default \answerTODO{} to either:
-%
-%     \answerYes{[justification]},
-%     \answerNo{[justification]}, or
-%     \answerNA{[justification]}.
-
-% *You must include a brief justification to your answer,} either by referencing
-% *the appropriate section of your paper or providing a brief inline
-% *description.* For example:
-%
-% -  Did you include the license of the code and datasets?
-%
-%    \answerYes{See Section~\ref{sec:code}.
-%
-% - Did you include all the code for running experiments?
-%
-%   \answerNo{We include the code we wrote for conducting the experiments, but
-%   complete replication depends on proprietary libraries for executing on a
-%   private compute cluster. The code therefore is not runnable without
-%   modification. To compensate, we provide a runnable but non-parallelized
-%   version of the code that could replicate the results at the expense of a
-%   greater wall-clock time.}
-%
-% - Did you include the license of the datasets?
-%
-%   \answerNA{Our experiments were conducted on publicly available datasets and
-%   we have not introduced new datasets.}
-%
-% Please note that if you answer a question with \verb|\answerNo{}|, we expect
-% that you provide an explanation and/or compensation for the omission. For
-% example, if you cannot provide complete evaluation code for some reason, you
-% might instead provide code for a minimal reproduction of the main insights of
-% your paper.
-%
-% Please do not modify the questions and only use the provided macros for your
-% answers. Note that the submission checklist does not count towards the page
-% limit.
+% All submissions are welcome to include the AutoML submission checklist
+% provided below. *While not required, including the checklist may be beneficial
+% during the reproducibility review process and for maximizing long-term
+% impact.* If you choose to include the checklist, it will not count towards the
+% page limit. For more details, see the instructions.pdf file included in this
+% repository.
 
 \begin{enumerate}
 \item For all authors\dots
@@ -244,7 +180,7 @@
     \answerTODO{}
     %
   \item Did you read the ethics review guidelines and ensure that your paper
-    conforms to them? \url{https://2022.automl.cc/ethics-accessibility/}
+    conforms to them? (see \url{https://2022.automl.cc/ethics-accessibility/})
     %
     \answerTODO{}
     %
@@ -254,20 +190,22 @@
   %
   \begin{enumerate}
   \item Did you use the same evaluation protocol for all methods being compared (e.g.,
-    same benchmarks, data (sub)sets, available resources)?
+    same benchmarks, data (sub)sets, available resources, etc.)?
     %
     \answerTODO{}
     %
   \item Did you specify all the necessary details of your evaluation (e.g., data splits,
-    pre-processing, search spaces, hyperparameter tuning)?
+    pre-processing, search spaces, hyperparameter tuning details and results, etc.)?
     %
     \answerTODO{}
     %
-  \item Did you repeat your experiments (e.g., across multiple random seeds or splits) to account for the impact of randomness in your methods or data?
+  \item Did you repeat your experiments (e.g., across multiple random seeds or
+    splits) to account for the impact of randomness in your methods or data?
     %
     \answerTODO{}
     %
-  \item Did you report the uncertainty of your results (e.g., the variance across random seeds or splits)?
+  \item Did you report the uncertainty of your results (e.g., the standard error
+    across random seeds or splits)?
     %
     \answerTODO{}
     %
@@ -275,11 +213,13 @@
     %
     \answerTODO{}
     %
-  \item Did you use tabular or surrogate benchmarks for in-depth evaluations?
+  \item Did you use enough repetitions, datasets, and/or benchmarks to support
+    your claims?
     %
     \answerTODO{}
     %
-  \item Did you compare performance over time and describe how you selected the maximum duration?
+  \item Did you compare performance over time and describe how you selected the
+    maximum runtime?
     %
     \answerTODO{}
     %
@@ -299,10 +239,10 @@
   %
   \begin{enumerate}
 \item Did you include the code, data, and instructions needed to reproduce the
-    main experimental results, including all requirements (e.g.,
+    main experimental results, including all dependencies (e.g.,
     \texttt{requirements.txt} with explicit versions), random seeds, an instructive
-    \texttt{README} with installation, and execution commands (either in the
-    supplemental material or as a \textsc{url})?
+    \texttt{README} with installation instructions, and execution commands
+    (either in the supplemental material or as a \textsc{url})?
     %
     \answerTODO{}
     %
@@ -351,7 +291,8 @@
   %
   \begin{enumerate}
     %
-    \item Did you mention the license of the new assets (e.g., as part of your code submission)?
+    \item Did you mention the license of the new assets (e.g., as part of your
+    code submission)?
     %
     \answerTODO{}
     %
@@ -371,7 +312,7 @@
     \answerTODO{}
     %
   \item Did you describe any potential participant risks, with links to
-    Institutional Review Board (\textsc{irb}) approvals, if applicable?
+    institutional review board (\textsc{irb}) approvals, if applicable?
     %
     \answerTODO{}
     %
