@@ -1,0 +1,14 @@
+Neural Architecture Search (NAS) has emerged as a powerful paradigm for automating neural network design. While significant progress has been made in improving sample efficiency and final performance, most NAS methods remain specialized to a single deployment target. This limits their practicality in real-world scenarios where architectures must be deployed across a diverse set of hardware platforms, each with distinct computational constraints and performance tradeoffs.
+
+To address this limitation, we focus on the problem of \textit{multi-device NAS}, where the goal is to discover architectures that are optimized for hardware-specific metrics (e.g., latency, memory footprint) and that generalize to unseen devices with minimal adaptation cost. Current hardware-aware NAS approaches \cite{wu2019fbnet, cai2019proxylessnas} rely on performance measurements collected from a fixed device and fail to generalize when the deployment conditions change. In contrast, we propose to train a NAS controller that is exposed during training to a diverse distribution of hardware devices. This enables the controller to learn generalizable priors over device-conditioned architecture search trajectories.
+
+Our key insight is to cast hardware-aware NAS as a meta-learning problem. We meta-train a reinforcement learning (RL) controller across multiple devices, each sampled with its own latency and task constraints. The controller learns to maximize a training-free proxy for downstream accuracy, enabling efficient evaluation without full model training. At test time, the controller adapts to new hardware targets using only a few queries, achieving strong performance on devices never seen during meta-training.
+
+This work makes the following contributions:
+\begin{itemize}
+    \item We formalize the task of multi-device neural architecture search and propose a meta-learning framework to address it.
+    \item We design a domain-randomized RL training procedure that enables the NAS controller to generalize across heterogeneous devices.
+    \item We empirically validate our method on multiple edge devices, demonstrating its ability to perform few-shot NAS on previously unseen hardware platforms.
+\end{itemize}
+
+By enabling cross-device generalization, our approach offers a scalable path toward deployable NAS in practical settings, where architecture specialization must be fast, accurate, and hardware-aware.
