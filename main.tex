@@ -17,6 +17,8 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 
+\input{commands.tex}
+
 % With no package options, the submission will be anonymized, the supplemental
 % material will be visible, and line numbers will be added to the manuscript.
 %
@@ -53,7 +55,8 @@
 \usepackage{natbib}
 \bibliographystyle{apalike}
 
-\newcommand{\submissiontitle}{Ciao}
+\newcommand{\submissiontitle}{Learning to Search: HW-NAS Probing Few Networks}
+
 \title{\submissiontitle}
 \author[1]{\nameemail{Francesco Capuano}{francesco.capuano@ens-paris-saclay.fr}}
 
@@ -126,228 +129,228 @@
 
 \bibliography{references}
 
-\newpage
-\section{Submission Checklist}
+% \newpage
+% \section{Submission Checklist}
 
-All submissions are welcome to include the AutoML submission checklist provided
-below. \textbf{While not required, including the checklist may be beneficial
-  during the reproducibility review process and for maximizing long-term
-  impact.} If you choose to include the checklist, it will not count towards the
-page limit. The submission checklist draws upon related submission checklists:
-%
-\href{https://neurips.cc/Conferences/2022/PaperInformation/PaperChecklist}
-     {the NeurIPS '22 checklist}
-%
-and the
-\href{https://www.automl.org/wp-content/uploads/NAS/NAS_checklist.pdf}
-     {\textsc{nas} checklist}.
-%
+% All submissions are welcome to include the AutoML submission checklist provided
+% below. \textbf{While not required, including the checklist may be beneficial
+%   during the reproducibility review process and for maximizing long-term
+%   impact.} If you choose to include the checklist, it will not count towards the
+% page limit. The submission checklist draws upon related submission checklists:
+% %
+% \href{https://neurips.cc/Conferences/2022/PaperInformation/PaperChecklist}
+%      {the NeurIPS '22 checklist}
+% %
+% and the
+% \href{https://www.automl.org/wp-content/uploads/NAS/NAS_checklist.pdf}
+%      {\textsc{nas} checklist}.
+% %
 
-For each question, change the default \verb|\answerTODO{}| (typeset \answerTODO)
-to
-\verb|\answerYes{[justification]}| (typeset \answerYes),
-\verb|\answerNo{[justification]}| (typeset \answerNo), or
-\verb|\answerNA{[justification]}| (typeset \answerNA).
-We recommend including a brief justification to your answer, either by
-referencing the appropriate section of your paper or providing a brief inline
-description.  For example:
-\begin{itemize}
-\item Did you include the license of the code and datasets? \answerYes{See
-  Section~\ref{sec:code}.}
-\item Did you include all the code for running experiments? \answerNo{We include
-  the code we wrote for conducting the experiments, but complete replication
-  depends on proprietary libraries for executing on a private compute
-  cluster. The code therefore is not runnable without modification. To
-  compensate, we provide a runnable but non-parallelized version of the code
-  that could replicate the results at the expense of a greater wall-clock time.}
-\item Did you include the license of the datasets? \answerNA{Our experiments
-  were conducted on publicly available datasets and we have not introduced new
-  datasets.}
-\end{itemize}
-Please note that if you answer a question with \verb|\answerNo{}|, we recommend
-providing an explanation and/or compensation for the omission. For example, if
-you cannot provide complete evaluation code for some reason, you might instead
-provide code for a minimal reproduction of the main insights of your paper.
+% For each question, change the default \verb|\answerTODO{}| (typeset \answerTODO)
+% to
+% \verb|\answerYes{[justification]}| (typeset \answerYes),
+% \verb|\answerNo{[justification]}| (typeset \answerNo), or
+% \verb|\answerNA{[justification]}| (typeset \answerNA).
+% We recommend including a brief justification to your answer, either by
+% referencing the appropriate section of your paper or providing a brief inline
+% description.  For example:
+% \begin{itemize}
+% \item Did you include the license of the code and datasets? \answerYes{See
+%   Section~\ref{sec:code}.}
+% \item Did you include all the code for running experiments? \answerNo{We include
+%   the code we wrote for conducting the experiments, but complete replication
+%   depends on proprietary libraries for executing on a private compute
+%   cluster. The code therefore is not runnable without modification. To
+%   compensate, we provide a runnable but non-parallelized version of the code
+%   that could replicate the results at the expense of a greater wall-clock time.}
+% \item Did you include the license of the datasets? \answerNA{Our experiments
+%   were conducted on publicly available datasets and we have not introduced new
+%   datasets.}
+% \end{itemize}
+% Please note that if you answer a question with \verb|\answerNo{}|, we recommend
+% providing an explanation and/or compensation for the omission. For example, if
+% you cannot provide complete evaluation code for some reason, you might instead
+% provide code for a minimal reproduction of the main insights of your paper.
 
-Please do not modify the questions and only use the provided macros for your
-answers. Note that the submission checklist does not count towards the page
-limit. If you choose to modify \texttt{instructions.tex}, please delete these
-instructions and only keep the Submission Checklist section heading above along
-with the questions/answers below.
+% Please do not modify the questions and only use the provided macros for your
+% answers. Note that the submission checklist does not count towards the page
+% limit. If you choose to modify \texttt{instructions.tex}, please delete these
+% instructions and only keep the Submission Checklist section heading above along
+% with the questions/answers below.
 
-\begin{enumerate}
-\item For all authors\dots
-  %
-  \begin{enumerate}
-  \item Do the main claims made in the abstract and introduction accurately
-    reflect the paper's contributions and scope?
-    %
-    \answerTODO{}
-    %
-  \item Did you describe the limitations of your work?
-    %
-    \answerTODO{}
-    %
-  \item Did you discuss any potential negative societal impacts of your work?
-    %
-    \answerTODO{}
-    %
-  \item Did you read the ethics review guidelines and ensure that your paper
-    conforms to them? (see \url{https://2022.automl.cc/ethics-accessibility/})
-    %
-    \answerTODO{}
-    %
-  \end{enumerate}
-  %
-\item If you ran experiments\dots
-  %
-  \begin{enumerate}
-  \item Did you use the same evaluation protocol for all methods being compared (e.g.,
-    same benchmarks, data (sub)sets, available resources, etc.)?
-    %
-    \answerTODO{}
-    %
-  \item Did you specify all the necessary details of your evaluation (e.g., data splits,
-    pre-processing, search spaces, hyperparameter tuning details and results, etc.)?
-    %
-    \answerTODO{}
-    %
-  \item Did you repeat your experiments (e.g., across multiple random seeds or
-    splits) to account for the impact of randomness in your methods or data?
-    %
-    \answerTODO{}
-    %
-  \item Did you report the uncertainty of your results (e.g., the standard error
-    across random seeds or splits)?
-    %
-    \answerTODO{}
-    %
-  \item Did you report the statistical significance of your results?
-    %
-    \answerTODO{}
-    %
-  \item Did you use enough repetitions, datasets, and/or benchmarks to support
-    your claims?
-    %
-    \answerTODO{}
-    %
-  \item Did you compare performance over time and describe how you selected the
-    maximum runtime?
-    %
-    \answerTODO{}
-    %
-  \item Did you include the total amount of compute and the type of resources
-    used (e.g., type of \textsc{gpu}s, internal cluster, or cloud provider)?
-    %
-    \answerTODO{}
-    %
-  \item Did you run ablation studies to assess the impact of different
-    components of your approach?
-    %
-    \answerTODO{}
-    %
-  \end{enumerate}
-  %
-\item With respect to the code used to obtain your results\dots
-  %
-  \begin{enumerate}
-\item Did you include the code, data, and instructions needed to reproduce the
-    main experimental results, including all dependencies (e.g.,
-    \texttt{requirements.txt} with explicit versions), random seeds, an instructive
-    \texttt{README} with installation instructions, and execution commands
-    (either in the supplemental material or as a \textsc{url})?
-    %
-    \answerTODO{}
-    %
-  \item Did you include a minimal example to replicate results on a small subset
-    of the experiments or on toy data?
-    %
-    \answerTODO{}
-    %
-  \item Did you ensure sufficient code quality and documentation so that someone else
-    can execute and understand your code?
-    %
-    \answerTODO{}
-    %
-  \item Did you include the raw results of running your experiments with the given
-    code, data, and instructions?
-    %
-    \answerTODO{}
-    %
-  \item Did you include the code, additional data, and instructions needed to generate
-    the figures and tables in your paper based on the raw results?
-    %
-    \answerTODO{}
-    %
-  \end{enumerate}
-  %
-\item If you used existing assets (e.g., code, data, models)\dots
-  %
-  \begin{enumerate}
-  \item Did you cite the creators of used assets?
-    %
-    \answerTODO{}
-    %
-  \item Did you discuss whether and how consent was obtained from people whose
-    data you're using/curating if the license requires it?
-    %
-    \answerTODO{}
-    %
-  \item Did you discuss whether the data you are using/curating contains
-    personally identifiable information or offensive content?
-    %
-    \answerTODO{}
-    %
-  \end{enumerate}
-  %
-\item If you created/released new assets (e.g., code, data, models)\dots
-  %
-  \begin{enumerate}
-    %
-    \item Did you mention the license of the new assets (e.g., as part of your
-    code submission)?
-    %
-    \answerTODO{}
-    %
-    \item Did you include the new assets either in the supplemental material or as
-    a \textsc{url} (to, e.g., GitHub or Hugging Face)?
-    %
-    \answerTODO{}
-    %
-  \end{enumerate}
-  %
-\item If you used crowdsourcing or conducted research with human subjects\dots
-  %
-  \begin{enumerate}
-  \item Did you include the full text of instructions given to participants and
-    screenshots, if applicable?
-    %
-    \answerTODO{}
-    %
-  \item Did you describe any potential participant risks, with links to
-    institutional review board (\textsc{irb}) approvals, if applicable?
-    %
-    \answerTODO{}
-    %
-  \item Did you include the estimated hourly wage paid to participants and the
-    total amount spent on participant compensation?
-    %
-    \answerTODO{}
-    %
-  \end{enumerate}
-\item If you included theoretical results\dots
-  %
-  \begin{enumerate}
-  \item Did you state the full set of assumptions of all theoretical results?
-    %
-    \answerTODO{}
-    %
-  \item Did you include complete proofs of all theoretical results?
-    %
-    \answerTODO{}
-    %
-  \end{enumerate}
-  %
-\end{enumerate}
+% \begin{enumerate}
+% \item For all authors\dots
+%   %
+%   \begin{enumerate}
+%   \item Do the main claims made in the abstract and introduction accurately
+%     reflect the paper's contributions and scope?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you describe the limitations of your work?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you discuss any potential negative societal impacts of your work?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you read the ethics review guidelines and ensure that your paper
+%     conforms to them? (see \url{https://2022.automl.cc/ethics-accessibility/})
+%     %
+%     \answerTODO{}
+%     %
+%   \end{enumerate}
+%   %
+% \item If you ran experiments\dots
+%   %
+%   \begin{enumerate}
+%   \item Did you use the same evaluation protocol for all methods being compared (e.g.,
+%     same benchmarks, data (sub)sets, available resources, etc.)?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you specify all the necessary details of your evaluation (e.g., data splits,
+%     pre-processing, search spaces, hyperparameter tuning details and results, etc.)?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you repeat your experiments (e.g., across multiple random seeds or
+%     splits) to account for the impact of randomness in your methods or data?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you report the uncertainty of your results (e.g., the standard error
+%     across random seeds or splits)?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you report the statistical significance of your results?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you use enough repetitions, datasets, and/or benchmarks to support
+%     your claims?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you compare performance over time and describe how you selected the
+%     maximum runtime?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you include the total amount of compute and the type of resources
+%     used (e.g., type of \textsc{gpu}s, internal cluster, or cloud provider)?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you run ablation studies to assess the impact of different
+%     components of your approach?
+%     %
+%     \answerTODO{}
+%     %
+%   \end{enumerate}
+%   %
+% \item With respect to the code used to obtain your results\dots
+%   %
+%   \begin{enumerate}
+% \item Did you include the code, data, and instructions needed to reproduce the
+%     main experimental results, including all dependencies (e.g.,
+%     \texttt{requirements.txt} with explicit versions), random seeds, an instructive
+%     \texttt{README} with installation instructions, and execution commands
+%     (either in the supplemental material or as a \textsc{url})?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you include a minimal example to replicate results on a small subset
+%     of the experiments or on toy data?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you ensure sufficient code quality and documentation so that someone else
+%     can execute and understand your code?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you include the raw results of running your experiments with the given
+%     code, data, and instructions?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you include the code, additional data, and instructions needed to generate
+%     the figures and tables in your paper based on the raw results?
+%     %
+%     \answerTODO{}
+%     %
+%   \end{enumerate}
+%   %
+% \item If you used existing assets (e.g., code, data, models)\dots
+%   %
+%   \begin{enumerate}
+%   \item Did you cite the creators of used assets?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you discuss whether and how consent was obtained from people whose
+%     data you're using/curating if the license requires it?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you discuss whether the data you are using/curating contains
+%     personally identifiable information or offensive content?
+%     %
+%     \answerTODO{}
+%     %
+%   \end{enumerate}
+%   %
+% \item If you created/released new assets (e.g., code, data, models)\dots
+%   %
+%   \begin{enumerate}
+%     %
+%     \item Did you mention the license of the new assets (e.g., as part of your
+%     code submission)?
+%     %
+%     \answerTODO{}
+%     %
+%     \item Did you include the new assets either in the supplemental material or as
+%     a \textsc{url} (to, e.g., GitHub or Hugging Face)?
+%     %
+%     \answerTODO{}
+%     %
+%   \end{enumerate}
+%   %
+% \item If you used crowdsourcing or conducted research with human subjects\dots
+%   %
+%   \begin{enumerate}
+%   \item Did you include the full text of instructions given to participants and
+%     screenshots, if applicable?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you describe any potential participant risks, with links to
+%     institutional review board (\textsc{irb}) approvals, if applicable?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you include the estimated hourly wage paid to participants and the
+%     total amount spent on participant compensation?
+%     %
+%     \answerTODO{}
+%     %
+%   \end{enumerate}
+% \item If you included theoretical results\dots
+%   %
+%   \begin{enumerate}
+%   \item Did you state the full set of assumptions of all theoretical results?
+%     %
+%     \answerTODO{}
+%     %
+%   \item Did you include complete proofs of all theoretical results?
+%     %
+%     \answerTODO{}
+%     %
+%   \end{enumerate}
+%   %
+% \end{enumerate}
 
 \end{document}
