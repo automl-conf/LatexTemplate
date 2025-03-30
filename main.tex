@@ -53,12 +53,14 @@
 \usepackage{natbib}
 \bibliographystyle{apalike}
 
-\title{Documentation for the \texttt{automl} Package}
+\newcommand{\submissiontitle}{Ciao}
+\title{\submissiontitle}
+\author[1]{\nameemail{Francesco Capuano}{francesco.capuano@ens-paris-saclay.fr}}
 
 % The syntax for adding an author is
 %
 % \author[i]{\nameemail{author name}{author email}}
-%
+
 % where i is an affiliation counter. Authors may have
 % multiple affiliations; e.g.:
 %
@@ -76,7 +78,7 @@
 % Specify corresponding affiliations after authors, referring to counter used in
 % \author:
 %
-% \affil[1]{Institution 1}
+\affil[1]{École Normale Supérieure Paris-Saclay}
 %
 % the list might continue:
 % \affil[2]{Institution 2}
@@ -90,20 +92,12 @@
 % \author[2]{\nameemail{Author 3}{email3@example.com}}
 %
 
-\author[1,$\ast$]{\nameemail{Author 1}{email1@example.com}}
-\author[1,2,$\ast$]{\nameemail{Author 2}{email2@example.com}}
-\author[2]{\nameemail{Author 3}{email3@example.com}}
-
-\affil[$\ast$]{Equal contribution.}
-\affil[1]{Institution 1}
-\affil[2]{Institution 2}
-
 % define PDF metadata, aids in accessibility of the resulting PDF
 \hypersetup{%
-  pdfauthor={AutoML}, % will be reset to "Anonymous" unless the "final" package option is given
-  pdftitle={Documentation for the automl Package},
-  pdfsubject={Documentation for automl Package},
-  pdfkeywords={AutoML, LaTeX, style}
+  pdfauthor={Francesco Capuano}, % will be reset to "Anonymous" unless the "final" package option is given
+  pdftitle={\submissiontitle},
+  pdfsubject={MetaRL for NAS},
+  pdfkeywords={AutoML, Reinforcement Learning, NAS}
 }
 
 \begin{document}
@@ -113,6 +107,21 @@
 \begin{abstract}
     \input{sections/00_abstract.tex}
 \end{abstract}
+
+\section{Introduction}
+\input{sections/01_introduction}
+
+\section{Background}
+\input{sections/02_background}
+
+\section{Method}
+\input{sections/03_method}
+
+\section{Experiments}
+\input{sections/04_experiments}
+
+\section{Conclusions}
+\input{sections/05_conclusions}
 
 
 \bibliography{references}
@@ -340,11 +349,5 @@ with the questions/answers below.
   \end{enumerate}
   %
 \end{enumerate}
-
-\newpage
-\appendix
-\section{Proof of Theorem 1}
-
-This material will be hidden if the \texttt{hidesupplement} option is provided.
 
 \end{document}
