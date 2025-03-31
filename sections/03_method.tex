@@ -8,60 +8,68 @@
 % 5. Meta-training procedure & domain randomization
 % 6. Deployment stage: real-world latency measurement
 
-In this section, we present the details of our hardware-aware NAS framework that meta-learns a reinforcement learning (RL) controller to operate across multiple devices. We first formalize the problem setting and notation (\S\ref{sub:problem_setup}), then describe the proposed RL-based search procedure (\S\ref{sub:rl_search}). Next, we illustrate how we encode architectures and integrate training-free metrics (\S\ref{sub:arch_encoding}), before clarifying our meta-training algorithm and its domain randomization strategy (\S\ref{sub:meta_training}). Finally, we discuss how the controller is deployed and how real-world latency is measured with minimal overhead (\S\ref{sub:deployment_stage}).
+\subsection{Problem Setting}
+\label{subsec:problem_setting}
 
-\subsection{Problem Setup and Notation}
-\label{sub:problem_setup}
-We consider a multi-device HW-NAS problem in which the goal is to discover an architecture $a \in \mathcal{A}$ that balances downstream accuracy (or a training-free proxy) and real-world latency on a target hardware device. 
-Formally:
+In the single-device HW-NAS problem, the goal of a search strategy is to find the architecture \(h^* \in \mathcal{H}\) best balancing downstream task performance \( \text{Acc}(h), \ \forall h \in \mathcal H \) with task performance \( \text{Latency}(h) \ \forall h \in \mathcal H \), according to some weighting of choice.
+Formally, 
 \[
-    \underset{a \in \mathcal{A}}{\text{maximize}} \quad \mathrm{AccProxy}(a) \quad \text{subject to} \quad \mathrm{Latency}_{\mathrm{real}}(a,d) \leq \tau,
+    \underset{h \in \mathcal{H}}{\max} \quad \text{Acc}(h) \quad \text{subject to} \quad \text{Latency}_d(h) \leq \tau,
 \]
-where $\mathrm{Latency}_{\mathrm{real}}(a,d)$ is the measured post-compilation latency of architecture $a$ on device $d$, and $\tau$ is an admissible threshold for that device. 
-Our method extends this objective across multiple possible devices $\{d_1, d_2, \dots\}$, each with a different $\tau_i$, allowing us to handle device variation in a single framework.
+where \( \mathrm{Latency}_{d}(h) \) is the measured \emph{post-compilation} latency of architecture \( h \) on device \( d \), and \( \tau \) is an admissible latency threshold for that device. 
+Our method extends this objective across a pool of diverse devices \( \mathcal D = \{d_1, d_2, \dots \} \), possibly each with a different \( \tau_i \).
 
-\subsection{RL-based Search Procedure}
-\label{sub:rl_search}
-\paragraph{RL Environment Design.}
-We frame the architecture selection problem as a sequential decision process, where each state $s_t$ represents a partially built candidate network (or an existing architecture), and actions $a_t$ correspond to modifying or finalizing the architecture. The environment provides a scalar reward, computed from training-free proxies and hardware feedback, guiding the RL policy $\pi_\theta$ to select promising architectures while respecting latency constraints. 
+We attain this framing HW-NAS as a sequential problem formalized through a Markov Decision Process (MDP). 
+In the MDP, states \( s_t \) represents a given candidate architecture, and actions \( a_t \) correspond to modifying or finalizing the architecture. 
+% In particular, we focus on cell-based NAS tackling NATS-Bench's topological searchspace~\citep{dong2021nats}.
+In this context, states equate to candidate architectures' cells \( s \equiv [ o_1, o_2, \dots, o_5 ], \ o_i \in \mathcal O_{\text{NATS}} \). Actions \( a = [i, o_\text{new}], \ i=1, \dots, 6, \ o \in \mathcal O_\text{NATS} \) allow the controller to modify \( s \), selecting an operation \( o_i \in s \) to replace with \( o_\text{new} \).
+The environment provides a scalar reward \( r_t = c_1 \pfreerea(s_t) + c_2 \phardware \), rewarding higher values of the considered TF-proxy, while guiding the policy to maximize hardware performance---in our case, minimizing latency.
 
-\paragraph{Policy Parameterization.}
-The controller $\pi_\theta$ is typically represented by a neural network (e.g., a multi-layer perceptron or LSTM) that outputs a distribution over possible actions given the current architecture encoding $h(s_t)$. We adopt a trust-region or policy-gradient algorithm (e.g., PPO) to iteratively optimize $\theta$. 
+In our method, the policy \( \pi \) is typically represented by a neural network itself, which takes as input states \( s_t \) and outputs actions \( a_t \). 
+As our goal is to develop across-devices policies, \( s_t \) also contains information regarding candidates' latency. 
+Figure~\ref{fig:policynet} shows the design for our policy network: taking as input \emph{(i)} representation of the candidate architecture \( h \) and \emph{(ii)} the latency of the candidate architecture the latency and  outputs a distribution over possible actions given the current architecture encoding $h(s_t)$. We adopt a trust-region or policy-gradient algorithm (e.g., PPO) to iteratively optimize $\theta$. 
 
-\paragraph{Reward Signal.}
-The controller’s reward at each timestep aggregates:
-\begin{itemize}
-    \item \textbf{Proxy Score} (e.g., NASWOT or LogSynflow), quantifying the architecture’s potential accuracy at initialization.
-    \item \textbf{Latency Penalty}, based on approximate or synthetic device performance metrics, ensuring that the controller learns to prefer architectures predicted to fit the latency constraint $\tau$.
-\end{itemize}
-When we deploy on a real device, we refine or finalize the policy’s choice with direct measurements on a \emph{small subset} of candidate architectures.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/policynet.png}
+    \caption{Overview of the }
+    \label{fig:policynet}
+\end{figure}
 
-\subsection{Architecture Encoding and Training-free Metrics}
-\label{sub:arch_encoding}
-\paragraph{Search Space Representation.}
-We adopt a cell-based search space (e.g., NAS-Bench-201) or a more flexible macro-level design, where each layer is selected from a set of possible operations. Each architecture $a \in \mathcal{A}$ can be encoded as a sequence of discrete tokens $\{o_1, o_2, \dots \}$ indicating convolution types, kernel sizes, skip connections, or other hyperparameters.
+% \paragraph{Reward Signal.}
+% The controller’s reward at each timestep aggregates:
+% \begin{itemize}
+%     \item \textbf{Proxy Score} (e.g., NASWOT or LogSynflow), quantifying the architecture’s potential accuracy at initialization.
+%     \item \textbf{Latency Penalty}, based on approximate or synthetic device performance metrics, ensuring that the controller learns to prefer architectures predicted to fit the latency constraint $\tau$.
+% \end{itemize}
+% When we deploy on a real device, we refine or finalize the policy’s choice with direct measurements on a \emph{small subset} of candidate architectures.
 
-\paragraph{Training-free Proxy Integration.}
-At every RL timestep, the environment computes a training-free metric (NASWOT, LogSynflow, \dots) for the candidate $a$. This quick evaluation provides a gradient-free proxy for final accuracy. Notably, we do \emph{not} train or fine-tune $a$; we only measure the untrained model’s properties. This maintains the low per-probe cost $c$ crucial to scaling RL-based NAS.
+% ubsection{Architecture Encoding and Training-free Metrics}
+% \label{sub:arch_encoding}
+% \paragraph{Search Space Representation.}
+% We adopt a cell-based search space (e.g., NAS-Bench-201) or a more flexible macro-level design, where each layer is selected from a set of possible operations. Each architecture $a \in \mathcal{A}$ can be encoded as a sequence of discrete tokens $\{o_1, o_2, \dots \}$ indicating convolution types, kernel sizes, skip connections, or other hyperparameters.
 
-\subsection{Meta-Training with Domain Randomization}
-\label{sub:meta_training}
-\paragraph{Synthetic Hardware Profiles.}
-To enable cross-device generalization, we create multiple synthetic device profiles that approximate or bracket the latency distributions of real hardware. Each profile randomly varies operator latencies, memory limits, or pipeline stages, exposing the RL controller to a broad distribution of pseudo-latency signals during training.
+% \paragraph{Training-free Proxy Integration.}
+% At every RL timestep, the environment computes a training-free metric (NASWOT, LogSynflow, \dots) for the candidate $a$. This quick evaluation provides a gradient-free proxy for final accuracy. Notably, we do \emph{not} train or fine-tune $a$; we only measure the untrained model’s properties. This maintains the low per-probe cost $c$ crucial to scaling RL-based NAS.
 
-\paragraph{Controller Optimization.}
-We run RL (e.g., PPO) for multiple episodes on the domain-randomized environment, sampling a different synthetic profile each episode or mini-batch. Over time, $\pi_\theta$ learns robust strategies that do not overfit to a single device. Crucially, this meta-training stage requires \emph{no} real-world device measurements, so we avoid the large overhead of repeated compilation or inference runs.
+% ubsection{Meta-Training with Domain Randomization}
+% \label{sub:meta_training}
+% \paragraph{Synthetic Hardware Profiles.}
+% To enable cross-device generalization, we create multiple synthetic device profiles that approximate or bracket the latency distributions of real hardware. Each profile randomly varies operator latencies, memory limits, or pipeline stages, exposing the RL controller to a broad distribution of pseudo-latency signals during training.
 
-\paragraph{Few-Shot Adaptation.}
-At deployment time, we can optionally allow a small number of real measurements from the target device to fine-tune or guide the controller’s final architecture choices. This step ensures reliability for risk-averse domains by eliminating the approximation gap from synthetic distributions.
+% \paragraph{Controller Optimization.}
+% We run RL (e.g., PPO) for multiple episodes on the domain-randomized environment, sampling a different synthetic profile each episode or mini-batch. Over time, $\pi_\theta$ learns robust strategies that do not overfit to a single device. Crucially, this meta-training stage requires \emph{no} real-world device measurements, so we avoid the large overhead of repeated compilation or inference runs.
 
-\subsection{Deployment Stage: Real-World Latency with Limited Probes}
-\label{sub:deployment_stage}
-Finally, we describe how the meta-trained controller is used in real-world HW-NAS:
-\begin{enumerate}
-    \item \textbf{Controller Proposes Candidates.} The RL policy $\pi_\theta$ (trained on synthetic profiles) proposes a small set of architectures $\{a_1, \dots, a_k\}$.
-    \item \textbf{Measure True Latency.} Each proposed architecture $a_i$ is compiled and measured on the actual device $d$. Only $k \ll \lvert \mathcal{A}\rvert$ measurements are performed, making the total cost $C$ remain feasible.
-    \item \textbf{Select the Final Architecture.} The best architecture that satisfies latency constraints while maximizing the proxy-based performance is chosen. No predictor or LUT is needed, as each candidate’s cost is known exactly.
-\end{enumerate}
-By limiting $k$, we avoid the overhead of measuring all possible architectures. The policy’s meta-learned knowledge ensures that most proposed designs are high-quality, thus preserving search efficiency. 
+% \paragraph{Few-Shot Adaptation.}
+% At deployment time, we can optionally allow a small number of real measurements from the target device to fine-tune or guide the controller’s final architecture choices. This step ensures reliability for risk-averse domains by eliminating the approximation gap from synthetic distributions.
+
+% ubsection{Deployment Stage: Real-World Latency with Limited Probes}
+% \label{sub:deployment_stage}
+% Finally, we describe how the meta-trained controller is used in real-world HW-NAS:
+% \begin{enumerate}
+%     \item \textbf{Controller Proposes Candidates.} The RL policy $\pi_\theta$ (trained on synthetic profiles) proposes a small set of architectures $\{a_1, \dots, a_k\}$.
+%     \item \textbf{Measure True Latency.} Each proposed architecture $a_i$ is compiled and measured on the actual device $d$. Only $k \ll \lvert \mathcal{A}\rvert$ measurements are performed, making the total cost $C$ remain feasible.
+%     \item \textbf{Select the Final Architecture.} The best architecture that satisfies latency constraints while maximizing the proxy-based performance is chosen. No predictor or LUT is needed, as each candidate’s cost is known exactly.
+% \end{enumerate}
+% By limiting $k$, we avoid the overhead of measuring all possible architectures. The policy’s meta-learned knowledge ensures that most proposed designs are high-quality, thus preserving search efficiency. 
 
