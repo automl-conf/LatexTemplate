@@ -7,10 +7,10 @@
 % Please file any issues you may have there.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{automl}[2026/02/17 AutoML submission/camera-ready style file]
+\ProvidesPackage{automl}[2026/09/30 AutoML submission/camera-ready style file]
 
 % change this every year for notice string
-\newcommand{\@utomlyear}{2026}
+\newcommand{\@utomlyear}{2027}
 
 % declare final option, which creates camera-ready copy
 \newif\if@submission\@submissiontrue
@@ -387,5 +387,123 @@
 \newcommand{\answerNo}[1]{{\textcolor{answerNoColor}{[No]}\xspace#1}}
 \newcommand{\answerNA}[1]{{\textcolor{answerNAColor}{[N/A]}\xspace#1}}
 \newcommand{\answerTODO}{\textcolor{answerTODOColor}{\textbf{[TODO]}}}
+
+% page limit check (anonymized/blind submission only)
+%
+% The main content is everything before the bibliography, \appendix, or
+% \automlendofmaincontent (whichever comes first). If it exceeds the page limit,
+% everything past the limit is marked in dark red and the first page states by
+% how many lines the limit is exceeded. The document still compiles. Positions
+% are stored in the .aux file, so the marking appears after a second run.
+\if@submission\else
+  \newcommand{\automlendofmaincontent}{}
+  \expandafter\endinput
+\fi
+\newcommand{\@utomlpagelimit}{9}
+
+\RequirePackage{zref-savepos,zref-abspage}
+\zref@addprop{savepos}{abspage}
+\RequirePackage{tikz}
+\definecolor{automlOverLimit}{RGB}{139,0,0} % dark red
+
+\newif\if@utomlmainended\@utomlmainendedfalse
+\newcommand{\automlendofmaincontent}{%
+  \if@utomlmainended\else
+    \global\@utomlmainendedtrue
+    \par\zsavepos{automl@mainend}%
+    % pages over the limit are typeset in dark red (see shipout/before below); switch
+    % back to the normal color for whatever follows the main content
+    \ifnum\@utomlendpage>\@utomlpagelimit\relax
+      \reset@color
+      \begingroup\let\aftergroup\@gobble\normalcolor\endgroup
+    \fi
+  \fi
+}
+\AddToHook{env/thebibliography/before}{\automlendofmaincontent}
+\AddToHook{enddocument}{\automlendofmaincontent}
+\AtBeginDocument{%
+  \let\@utomlorigappendix\appendix
+  \def\appendix{\automlendofmaincontent\@utomlorigappendix}%
+  \@ifundefined{printbibliography}{}{%
+    \let\@utomlorigprintbibliography\printbibliography
+    \def\printbibliography{\automlendofmaincontent\@utomlorigprintbibliography}%
+  }%
+}
+
+% last page of main content, how far down that page (from the top) it ends,
+% and roughly how many lines of main content lie beyond the page limit
+\newcount\@utomlendpage
+\newdimen\@utomlendcut
+\newdimen\@utomlmarkheight
+\newcount\@utomloverlines
+\newcount\@utomltmp
+\newcommand{\@utomltexttop}{\dimexpr1in+\voffset+\topmargin+\headheight+\headsep\relax}
+\AtBeginDocument{%
+  \global\@utomlendpage=\zref@extractdefault{automl@mainend}{abspage}{0}\relax
+  \global\@utomlendcut=\dimexpr\paperheight-\zposy{automl@mainend}sp\relax
+  % main content ended at the very top of a page: that page holds none of it
+  \ifdim\@utomlendcut<\dimexpr\@utomltexttop+2\p@\relax
+    \global\advance\@utomlendpage\m@ne
+    \global\@utomlendcut=\paperheight
+  \fi
+  \ifnum\@utomlendpage>\@utomlpagelimit\relax
+    % lines on the last page of main content (rounded up) ...
+    \dimen@=\dimexpr\@utomlendcut-\@utomltexttop\relax
+    \ifdim\dimen@>\textheight \dimen@=\textheight \fi
+    \@utomltmp=\dimen@
+    \divide\@utomltmp\baselineskip
+    \ifdim\dimexpr\baselineskip*\@utomltmp\relax<\dimen@ \advance\@utomltmp\@ne \fi
+    \global\@utomloverlines=\@utomltmp
+    % ... plus full pages in between
+    \@utomltmp=\textheight
+    \divide\@utomltmp\baselineskip
+    \global\advance\@utomloverlines\numexpr\@utomltmp*(\@utomlendpage-\@utomlpagelimit-1)\relax
+    \PackageWarningNoLine{automl}{%
+      Main content spans \the\@utomlendpage\space pages, exceeding the\MessageBreak
+      page limit of \@utomlpagelimit\space pages by about \the\@utomloverlines\space lines.\MessageBreak
+      Content beyond the limit is marked in dark red}%
+  \fi
+}
+
+\newcommand{\@utomloverlimitsummary}{%
+  main content: \the\@utomlendpage\space pages, limit: \@utomlpagelimit\space pages,
+  \the\@utomloverlines\space lines over}
+
+% typeset everything on pages over the limit in dark red
+\AddToHook{shipout/before}{%
+  \ifnum\c@abspage>\@utomlpagelimit\relax
+    \ifnum\c@abspage>\@utomlendpage\else
+      \setbox\ShipoutBox=\vbox{\begingroup\color{automlOverLimit}\box\ShipoutBox\endgroup}%
+    \fi
+  \fi
+}
+
+\AddToHook{shipout/foreground}{%
+  \ifnum\@utomlendpage>\@utomlpagelimit\relax
+    % notice on the first page
+    \ifnum\c@abspage=\@ne
+      \put(0,0){\tikz[overlay]{%
+        \node[draw=automlOverLimit, line width=1.5\p@, rounded corners, fill=automlOverLimit!8,
+              text=automlOverLimit, align=center, inner sep=4\p@, anchor=north]
+          at (0.5\paperwidth,-0.3in)
+          {\bfseries\large Over the page limit by \the\@utomloverlines\space lines\\
+           \normalsize\@utomloverlimitsummary};
+      }}%
+    \fi
+  \fi
+  \ifnum\c@abspage>\@utomlpagelimit\relax
+    \ifnum\c@abspage>\@utomlendpage\else
+      \ifnum\c@abspage=\@utomlendpage
+        \@utomlmarkheight=\@utomlendcut
+      \else
+        \@utomlmarkheight=\paperheight
+      \fi
+      % light red tint over the part of the page beyond the limit
+      \put(0,0){\tikz[overlay]{%
+        \fill[automlOverLimit, opacity=0.06] (0,0) rectangle (\paperwidth,-\@utomlmarkheight);
+      }}%
+    \fi
+  \fi
+}
 
 \endinput
